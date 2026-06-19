@@ -124,10 +124,22 @@
        core typographic move — italic accents flip from sans italic
        (Iowan/Helvetica fallback) to a true Renaissance italic with
        its own caps, ligatures, and rhythm. */
+    /* Garamond italic is reserved for display HEADINGS only — on small
+       body text the light serif italic reads poorly. Body <em> therefore
+       stays in the page sans (just italic for emphasis); only heading
+       <em> below opt back into the serif. */
     em {
-      font-family: var(--font-serif);
       font-style: italic;
       font-weight: 400;
+    }
+    .hero__baseline em,
+    .section__title em,
+    .problem__title em,
+    .credibility__title em,
+    .countdown-card__date em,
+    .final-cta h2 em,
+    .payment-modal__title em {
+      font-family: var(--font-serif);
     }
     time, .tabular { font-variant-numeric: tabular-nums; }
 
@@ -388,7 +400,6 @@
        System serif fallback chain avoids loading another webfont. */
     .hero__sub em {
       font-style: italic;
-      font-family: var(--font-serif);
       color: oklch(0.45 0.10 175);
       font-weight: 400;
     }
@@ -681,7 +692,6 @@
     }
     .countdown-card__seat-price em {
       font-style: italic;
-      font-family: var(--font-serif);
       font-size: 0.62em;
       color: oklch(0.78 0.04 175);
       font-weight: 400;
@@ -1767,8 +1777,8 @@
       color: var(--foreground);
     }
     .blueprint__quad-line {
-      font-family: var(--font-serif);
-      font-style: italic;
+      font-family: var(--font-sans);
+      font-style: normal;
       font-size: 0.95rem;
       color: var(--foreground);
       line-height: 1.45;
