@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f4ec" />
+
+  <title>VISIBLE · Liste d'attente — accès prioritaire & prix fondateur</title>
+  <meta name="description" content="Rejoins la liste d'attente VISIBLE : accès prioritaire, prix fondateur verrouillé, ton mini Brand Blueprint offert, et l'invitation au workshop. Le talent ne paie pas. La marque, si." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VISIBLE · Rejoins la liste d'attente" />
+  <meta property="og:description" content="Accès prioritaire, prix fondateur verrouillé, ton mini Brand Blueprint offert. Le talent ne paie pas. La marque, si." />
+  <meta property="og:image" content="og-cover.jpg" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VISIBLE · Liste d'attente" />
+  <meta name="twitter:description" content="Le talent ne paie pas. La marque, si. Rejoins la liste." />
+  <meta name="twitter:image" content="og-cover.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ════════════════════════════════════════════════════════════
+       VISIBLE — waiting-list capture page.
+       Same design tokens as the workshop page (index.html): warm
+       off-white substrate, deep-teal accent, Garamond italic reserved
+       for HEADINGS only. Light + mobile-first (top-of-funnel speed).
+       ════════════════════════════════════════════════════════════ */
+    :root {
+      --background: oklch(0.98 0.004 80);
+      --background-alt: oklch(0.96 0.006 80);
+      --foreground: oklch(0.18 0 0);
+      --foreground-soft: oklch(0.30 0 0);
+      --card: oklch(1 0 0);
+      --muted: oklch(0.94 0.005 80);
+      --muted-foreground: oklch(0.45 0 0);
+      --tertiary: oklch(0.62 0 0);
+      --primary: oklch(0.5 0.10 175);
+      --primary-strong: oklch(0.42 0.10 175);
+      --primary-soft: oklch(0.5 0.10 175 / 9%);
+      --primary-foreground: oklch(1 0 0);
+      --border: oklch(0 0 0 / 8%);
+      --border-strong: oklch(0 0 0 / 14%);
+      --ring: oklch(0.5 0.10 175 / 45%);
+      --radius: 0.5rem;
+      --radius-md: 0.8rem;
+      --radius-lg: 1.1rem;
+      --radius-2xl: 1.5rem;
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Monaco", "Consolas", monospace;
+      --font-serif: "Adobe Garamond Pro", "EB Garamond", "Garamond", "Apple Garamond", "Hoefler Text", "Iowan Old Style", Georgia, "Times New Roman", serif;
+      --max-w: 64rem;
+      --gutter: 1.25rem;
+      --noise-on-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    }
+    @media (min-width: 640px) { :root { --gutter: 1.5rem; } }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; color-scheme: light; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; background: none; color: inherit; border: 0; }
+    ul { list-style: none; }
+    h1, h2, h3 { letter-spacing: -0.022em; font-weight: 600; line-height: 1.1; }
+
+    /* Garamond italic — HEADINGS only (legibility on body kept in sans). */
+    em { font-style: italic; font-weight: 400; }
+    .h-serif em { font-family: var(--font-serif); color: var(--primary); }
+
+    .container { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--gutter); }
+    .preheader {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .preheader .slash { color: var(--primary); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-weight: 500; border-radius: var(--radius-md); line-height: 1; text-align: center;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-primary { background: var(--primary); color: var(--primary-foreground); }
+    .btn-primary:hover { background: var(--primary-strong); }
+    .btn-sm { padding: 0.6rem 0.95rem; font-size: 0.9rem; }
+    .btn-lg { padding: 1rem 1.4rem; font-size: 1.02rem; width: 100%; }
+    .btn-ghost { color: var(--foreground); border: 1px solid var(--border-strong); }
+    .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(1.4) blur(10px);
+      background: oklch(0.98 0.004 80 / 80%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; padding-block: 0.8rem; }
+    .nav__logo-img { height: 20px; width: auto; }
+
+    /* ── Hero ── */
+    .hero { position: relative; overflow: hidden; padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem); }
+    .hero__bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 15% 0%, var(--primary-soft), transparent 70%),
+        radial-gradient(50% 40% at 100% 10%, oklch(0.5 0.10 175 / 6%), transparent 70%);
+    }
+    .hero__grid { position: relative; z-index: 1; display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+    @media (min-width: 880px) { .hero__grid { grid-template-columns: 1.05fr 0.95fr; } }
+
+    .hero__core {
+      margin-top: 1.25rem;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .hero__sub-h {
+      margin-top: 1.75rem;
+      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .hero__lead {
+      margin-top: 0.75rem;
+      max-width: 32rem;
+      color: var(--foreground-soft);
+      font-size: clamp(1rem, 1.7vw, 1.12rem);
+      line-height: 1.5;
+    }
+    .hero__trust {
+      margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted-foreground);
+    }
+    .hero__trust span { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .hero__trust .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); }
+
+    /* ── Form card ── */
+    .form-card {
+      position: relative; isolation: isolate; overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-2xl);
+      padding: clamp(1.5rem, 3.5vw, 2rem);
+      box-shadow: 0 1px 0 oklch(1 0 0 / 60%) inset;
+    }
+    .form-card::before { content:""; position:absolute; inset:0; background-image: var(--noise-on-light); opacity: 0.28; mix-blend-mode: multiply; pointer-events:none; border-radius: inherit; }
+    .form-card > * { position: relative; z-index: 1; }
+    .form-card__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--primary); }
+    .form-card__title { margin-top: 0.5rem; font-size: clamp(1.4rem, 3vw, 1.8rem); }
+    .form-card__title small { display:block; font-weight:400; font-size: 0.95rem; color: var(--muted-foreground); letter-spacing: 0; margin-top: 0.3rem; }
+    .field { display: block; margin-top: 1rem; }
+    .field span { display: block; font-size: 0.82rem; font-weight: 500; color: var(--foreground-soft); margin-bottom: 0.3rem; }
+    .field span em { color: var(--tertiary); font-weight: 400; }
+    .field input {
+      width: 100%; font: inherit; color: var(--foreground);
+      background: var(--background); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md); padding: 0.8rem 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input::placeholder { color: var(--tertiary); }
+    .field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+    .form-card form > .btn { margin-top: 1.25rem; }
+    .form-card__micro { margin-top: 0.85rem; font-size: 0.82rem; color: var(--muted-foreground); text-align: center; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+    /* success state */
+    .form-success { text-align: center; padding-block: 1rem; }
+    .form-success__icon { font-size: 2.4rem; line-height: 1; }
+    .form-success h3 { margin-top: 0.6rem; font-size: 1.5rem; }
+    .form-success p { margin-top: 0.6rem; color: var(--foreground-soft); }
+
+    /* ── Sections ── */
+    .section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+    .section--alt { background: var(--background-alt); border-block: 1px solid var(--border); }
+    .section__head { max-width: 40rem; }
+    .section__title { margin-top: 0.6rem; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+    .section__lead { margin-top: 0.6rem; color: var(--foreground-soft); font-size: 1.02rem; }
+
+    /* benefits */
+    .benefits { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 760px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
+    .benefit {
+      position: relative; isolation: isolate; overflow: hidden;
+      background: var(--card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg); padding: 1.5rem;
+    }
+    .benefit__num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--primary); }
+    .benefit__icon {
+      width: 40px; height: 40px; margin-bottom: 1rem; display: grid; place-items: center;
+      border-radius: var(--radius-md); background: var(--primary-soft); color: var(--primary);
+    }
+    .benefit__icon svg { width: 20px; height: 20px; }
+    .benefit h3 { margin-top: 0.5rem; font-size: 1.15rem; }
+    .benefit p { margin-top: 0.5rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.55; }
+    .benefit strong { color: var(--foreground); font-weight: 500; }
+
+    /* gift showcase */
+    .gift { display: grid; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+    @media (min-width: 820px) { .gift { grid-template-columns: 1fr 1fr; } }
+    .gift__copy h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
+    .gift__copy p { margin-top: 0.8rem; color: var(--foreground-soft); line-height: 1.6; }
+    .gift__copy .gift__alt { margin-top: 0.8rem; font-size: 0.9rem; color: var(--muted-foreground); }
+
+    /* mini blueprint mockup */
+    .mini {
+      position: relative; isolation: isolate; overflow: hidden;
+      background: var(--card); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-2xl); padding: 1.4rem;
+      box-shadow: 0 20px 40px -28px oklch(0 0 0 / 35%);
+      transform: rotate(-1.2deg);
+    }
+    .mini::before { content:""; position:absolute; inset:0; background-image: var(--noise-on-light); opacity: 0.28; mix-blend-mode: multiply; pointer-events:none; border-radius: inherit; }
+    .mini > * { position: relative; z-index: 1; }
+    .mini__head { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); padding-bottom: 0.8rem; border-bottom: 1px dashed var(--border-strong); }
+    .mini__head strong { color: var(--foreground); }
+    .mini__row { padding-block: 0.85rem; border-bottom: 1px dashed var(--border); }
+    .mini__row:last-child { border-bottom: 0; }
+    .mini__k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); }
+    .mini__v { margin-top: 0.3rem; color: var(--foreground); font-size: 0.95rem; }
+    .mini__v .blank { color: var(--tertiary); }
+
+    /* audience + transparency */
+    .audience { text-align: center; max-width: 46rem; margin-inline: auto; }
+    .audience h2 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); }
+    .audience p { margin-top: 0.7rem; color: var(--foreground-soft); font-size: 1.05rem; }
+    .note {
+      margin: 1.75rem auto 0; max-width: 38rem;
+      background: var(--primary-soft); border: 1px solid oklch(0.5 0.10 175 / 22%);
+      border-radius: var(--radius-md); padding: 0.9rem 1.1rem;
+      font-size: 0.92rem; color: var(--foreground-soft); text-align: center;
+    }
+    .note strong { color: var(--foreground); font-weight: 600; }
+
+    /* final cta */
+    .final { text-align: center; }
+    .final h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); max-width: 24rem; margin-inline: auto; }
+    .final p { margin-top: 0.8rem; color: var(--foreground-soft); }
+    .final .btn { width: auto; margin-top: 1.5rem; padding-inline: 2rem; }
+
+    /* footer */
+    .footer { border-top: 1px solid var(--border); padding-block: 2rem; }
+    .footer__inner { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+    .footer__brand { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground); }
+    .footer__brand strong { color: var(--foreground); font-weight: 600; }
+    .footer__nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.85rem; color: var(--muted-foreground); }
+    .footer__nav a:hover { color: var(--primary); }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="#top" aria-label="VISIBLE"><img src="logo.svg" alt="VISIBLE" class="nav__logo-img" width="83" height="20" /></a>
+      <a href="#rejoindre" class="btn btn-primary btn-sm">Je rejoins la liste</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__grid">
+
+        <div class="reveal">
+          <p class="preheader"><span class="slash">/</span> VISIBLE arrive</p>
+          <h1 class="hero__core h-serif">Le talent ne paie pas. <em>La marque, si.</em></h1>
+          <p class="hero__sub-h">Rejoins la liste d'attente.</p>
+          <p class="hero__lead">Sois le premier informé, verrouille le <strong>prix fondateur</strong>, et reçois ton invitation au workshop VISIBLE.</p>
+          <div class="hero__trust" aria-hidden="true">
+            <span><span class="dot"></span> Gratuit</span>
+            <span><span class="dot"></span> Cadeau immédiat</span>
+            <span><span class="dot"></span> Zéro spam</span>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="reveal form-card" id="rejoindre" style="transition-delay: 100ms">
+          <p class="form-card__label">/ Liste d'attente · gratuit</p>
+          <h2 class="form-card__title">Réserve ta place dans la file.<small>Prénom + email, c'est tout.</small></h2>
+
+          <form id="waitlistForm" novalidate>
+            <label class="field">
+              <span>Prénom</span>
+              <input type="text" name="prenom" autocomplete="given-name" placeholder="Alex" required />
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" placeholder="toi@email.com" required />
+            </label>
+            <!-- honeypot anti-spam : laissé vide par les humains -->
+            <input type="text" name="_company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button type="submit" class="btn btn-primary btn-lg">
+              Je rejoins la liste
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+          <p class="form-card__micro">Gratuit · zéro spam · ton cadeau arrive dans la foulée.</p>
+
+          <!-- success state (révélé après envoi) -->
+          <div class="form-success" id="waitlistSuccess" hidden>
+            <div class="form-success__icon" aria-hidden="true">🎉</div>
+            <h3>Tu es sur la liste.</h3>
+            <p>Surveille ta boîte mail : ton cadeau arrive, et tu seras le premier prévenu pour le workshop.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3 CHOSES QUE TU OBTIENS -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__head reveal">
+          <p class="preheader"><span class="slash">/</span> Ce que tu obtiens</p>
+          <h2 class="section__title h-serif">3 raisons d'être <em>sur la liste.</em></h2>
+        </div>
+
+        <div class="benefits">
+          <div class="benefit reveal">
+            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3z"/></svg></div>
+            <div class="benefit__num">/ 01</div>
+            <h3>Accès &amp; prix fondateur</h3>
+            <p>Quand VISIBLE ouvre, tu passes <strong>en premier</strong> — avec le <strong>prix fondateur verrouillé</strong>, le plus bas que le programme aura jamais.</p>
+          </div>
+
+          <div class="benefit reveal" style="transition-delay: 80ms">
+            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7S10 2 7 2a2.5 2.5 0 0 0 0 5h5zM12 7s2-5 5-5a2.5 2.5 0 0 1 0 5h-5z"/></svg></div>
+            <div class="benefit__num">/ 02</div>
+            <h3>Un cadeau immédiat</h3>
+            <p>Ton <strong>mini Brand Blueprint</strong> : un avant-goût du livrable du workshop, à remplir aujourd'hui. <em>(Ou le calculateur de tarifs.)</em></p>
+          </div>
+
+          <div class="benefit reveal" style="transition-delay: 160ms">
+            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></div>
+            <div class="benefit__num">/ 03</div>
+            <h3>Invitation prioritaire</h3>
+            <p>L'invitation au <strong>prochain workshop</strong> avant tout le monde — et une <strong>place à tarif réduit</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LE CADEAU IMMÉDIAT (visuel) -->
+    <section class="section">
+      <div class="container gift">
+        <div class="gift__copy reveal">
+          <p class="preheader"><span class="slash">/</span> Ton cadeau</p>
+          <h2 class="h-serif">Le mini <em>Brand Blueprint.</em></h2>
+          <p>Un aperçu du plan que les participants construisent en direct au workshop : ton positionnement en une phrase, tes 3 mots de marque, ton premier pilier de contenu. <strong style="color:var(--foreground);font-weight:500">Tu commences à devenir visible avant même le live.</strong></p>
+          <p class="gift__alt">Tu reçois le lien par email, juste après ton inscription.</p>
+        </div>
+
+        <div class="reveal mini" style="transition-delay: 100ms" role="img" aria-label="Aperçu du mini Brand Blueprint">
+          <div class="mini__head"><span><strong>VISIBLE</strong> · MINI BRAND BLUEPRINT</span><span>1 PAGE</span></div>
+          <div class="mini__row">
+            <div class="mini__k">Mon positionnement</div>
+            <div class="mini__v">J'aide <span class="blank">_______</span> à <span class="blank">_______</span> grâce à <span class="blank">_______</span>.</div>
+          </div>
+          <div class="mini__row">
+            <div class="mini__k">Mes 3 mots de marque</div>
+            <div class="mini__v"><span class="blank">______</span> · <span class="blank">______</span> · <span class="blank">______</span></div>
+          </div>
+          <div class="mini__row">
+            <div class="mini__k">Mon 1ᵉʳ contenu-aimant</div>
+            <div class="mini__v"><span class="blank">________________________</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- À QUI C'EST DESTINÉ + TRANSPARENCE -->
+    <section class="section section--alt">
+      <div class="container audience reveal">
+        <p class="preheader" style="justify-content:center"><span class="slash">/</span> Pour qui</p>
+        <h2 class="h-serif">Pour les créatifs francophones <em>doués mais invisibles.</em></h2>
+        <p>Designers, monteurs, devs, consultants… talentueux, mais que personne ne connaît encore.</p>
+        <p class="note"><strong>VISIBLE est un programme premium et payant.</strong> La liste d'attente, elle, est gratuite — et te verrouille le prix fondateur. On joue franc-jeu : elle est faite pour celles et ceux qui veulent vraiment passer de l'ombre à la lumière.</p>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="section final">
+      <div class="container reveal">
+        <p class="preheader" style="justify-content:center"><span class="slash">/</span> Dernière chose</p>
+        <h2 class="h-serif">Ta marque commence <em>aujourd'hui.</em></h2>
+        <p>Rejoins la liste — gratuit, et ton cadeau t'attend.</p>
+        <a href="#rejoindre" class="btn btn-primary btn-lg">
+          Je rejoins la liste
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__brand">/ <strong>VISIBLE</strong> © 2026 · UN PROGRAMME PAR ALEX</p>
+      <nav class="footer__nav">
+        <a href="/">Le workshop</a>
+        <a href="https://logomint.co/fr" target="_blank" rel="noopener">LogoMint</a>
+        <a href="mailto:hello@visible.fr">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* ════════════════════════════════════════════════════════════
+       Le formulaire poste en JSON vers /api/waitlist (fonction Vercel)
+       qui ajoute le contact à l'audience Resend côté serveur (la clé
+       API n'est jamais exposée au navigateur). Voir api/waitlist.js.
+       ════════════════════════════════════════════════════════════ */
+    const form = document.getElementById("waitlistForm");
+    const success = document.getElementById("waitlistSuccess");
+    const micro = document.querySelector(".form-card__micro");
+
+    function showSuccess() {
+      form.hidden = true;
+      if (micro) micro.hidden = true;
+      success.hidden = false;
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (form.querySelector('[name="_company"]').value) return; // honeypot
+      if (!form.reportValidity()) return;
+
+      const btn = form.querySelector('[type="submit"]');
+      const original = btn.innerHTML;
+      btn.disabled = true;
+      btn.textContent = "Un instant…";
+
+      try {
+        const r = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            prenom: form.prenom.value.trim(),
+            email: form.email.value.trim(),
+            _company: "",
+          }),
+        });
+        if (r.ok || r.status === 503) {
+          if (r.status === 503) console.warn("[VISIBLE] /api/waitlist pas encore configuré (clés Resend manquantes dans Vercel).");
+          showSuccess();
+        } else {
+          const d = await r.json().catch(() => ({}));
+          throw new Error(d.error || "Erreur.");
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = original;
+        alert("Oups, réessaie dans un instant — ou écris-nous si ça persiste.");
+      }
+    });
+
+    /* reveal on scroll */
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    }
+  </script>
+</body>
+</html>

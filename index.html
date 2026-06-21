@@ -5,64 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f7f4ec" />
 
-  <title>VISIBLE · Liste d'attente — accès prioritaire & prix fondateur</title>
-  <meta name="description" content="Rejoins la liste d'attente VISIBLE : accès prioritaire, prix fondateur verrouillé, ton mini Brand Blueprint offert, et l'invitation au workshop. Le talent ne paie pas. La marque, si." />
+  <title>VISIBLE · Workshop live de 90 min — 1 août 2026</title>
+  <meta name="description" content="De designer invisible à designer demandé. 90 min en direct avec Alex pour transformer ton talent en marque qui attire des clients premium — sans démarcher. Samedi 1 août, 20h GMT. 15 € · replay inclus." />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="VISIBLE · Rejoins la liste d'attente" />
-  <meta property="og:description" content="Accès prioritaire, prix fondateur verrouillé, ton mini Brand Blueprint offert. Le talent ne paie pas. La marque, si." />
+  <meta property="og:title" content="VISIBLE · Workshop live · 1 août 2026" />
+  <meta property="og:description" content="De designer invisible à designer demandé. 90 min en direct, 15 €, replay inclus." />
   <meta property="og:image" content="og-cover.jpg" />
   <meta property="og:locale" content="fr_FR" />
+
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VISIBLE · Liste d'attente" />
-  <meta name="twitter:description" content="Le talent ne paie pas. La marque, si. Rejoins la liste." />
+  <meta name="twitter:title" content="VISIBLE · Workshop live" />
+  <meta name="twitter:description" content="De designer invisible à designer demandé. 90 min en direct, 15 €." />
   <meta name="twitter:image" content="og-cover.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Only the secondary serif comes from Google Fonts. Primary sans is
+       San Francisco via the -apple-system stack (zero bytes on macOS/iOS,
+       Segoe/Helvetica Neue fallback elsewhere). Mono is SF Mono / Menlo
+       via system stack. This saves ~80KB of webfont weight on the 3G
+       African audience and keeps load instant on first paint. -->
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet" />
 
   <style>
     /* ════════════════════════════════════════════════════════════
-       VISIBLE — waiting-list capture page.
-       Same design tokens as the workshop page (index.html): warm
-       off-white substrate, deep-teal accent, Garamond italic reserved
-       for HEADINGS only. Light + mobile-first (top-of-funnel speed).
+       DESIGN TOKENS — Supabase-inspired light editorial.
+       Warm off-white substrate, pure-white cards, subtle dark borders.
+       Brand teal darkened to oklch(0.5) so it stays AA-readable on a
+       cream background (the bright #1BA491 washed out against light).
        ════════════════════════════════════════════════════════════ */
     :root {
-      --background: oklch(0.98 0.004 80);
-      --background-alt: oklch(0.96 0.006 80);
-      --foreground: oklch(0.18 0 0);
-      --foreground-soft: oklch(0.30 0 0);
-      --card: oklch(1 0 0);
-      --muted: oklch(0.94 0.005 80);
-      --muted-foreground: oklch(0.45 0 0);
-      --tertiary: oklch(0.62 0 0);
-      --primary: oklch(0.5 0.10 175);
-      --primary-strong: oklch(0.42 0.10 175);
-      --primary-soft: oklch(0.5 0.10 175 / 9%);
-      --primary-foreground: oklch(1 0 0);
-      --border: oklch(0 0 0 / 8%);
-      --border-strong: oklch(0 0 0 / 14%);
-      --ring: oklch(0.5 0.10 175 / 45%);
+      --background: oklch(0.98 0.004 80);          /* warm off-white, paper */
+      --background-alt: oklch(0.96 0.006 80);      /* alt sections — barely deeper */
+      --foreground: oklch(0.18 0 0);               /* near-black */
+      --foreground-soft: oklch(0.30 0 0);          /* secondary body text */
+      --card: oklch(1 0 0);                        /* pure white */
+      --card-2: oklch(0.99 0.003 80);              /* almost-white, warm hint */
+      --muted: oklch(0.94 0.005 80);               /* subtle fill */
+      --muted-foreground: oklch(0.45 0 0);         /* tertiary, body/caption */
+      --tertiary: oklch(0.62 0 0);                 /* labels, placeholders */
+
+      --primary: oklch(0.5 0.10 175);              /* deep teal — readable on light */
+      --primary-strong: oklch(0.42 0.10 175);      /* hover, deeper */
+      --primary-soft: oklch(0.5 0.10 175 / 9%);    /* very subtle tint */
+      --primary-foreground: oklch(1 0 0);          /* white text on teal CTAs */
+
+      --border: oklch(0 0 0 / 8%);                  /* subtle dark hairline */
+      --border-strong: oklch(0 0 0 / 14%);          /* stronger separators */
+      --border-dashed: oklch(0 0 0 / 16%);
+      --ring: oklch(0.5 0.10 175 / 50%);
+      --destructive: oklch(0.55 0.22 25);
+
       --radius: 0.5rem;
       --radius-md: 0.8rem;
       --radius-lg: 1.1rem;
       --radius-2xl: 1.5rem;
+
+      /* San Francisco — Apple's system sans. Native on macOS/iOS (zero
+         download), gracefully falls back to Helvetica Neue / Segoe UI
+         elsewhere. The "SF Pro Display" hint lets newer Safari pick the
+         display optical-size variant on large headings. */
       --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+      /* SF Mono / Menlo via system stack — no webfont request needed. */
       --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Menlo", "Monaco", "Consolas", monospace;
+      /* Garamond Italic for editorial accent. Adobe Garamond / Apple
+         Garamond ship on macOS; EB Garamond from Google Fonts covers
+         everywhere else. ALL uses of var(--font-serif) should set
+         font-style: italic since that's the intent. */
       --font-serif: "Adobe Garamond Pro", "EB Garamond", "Garamond", "Apple Garamond", "Hoefler Text", "Iowan Old Style", Georgia, "Times New Roman", serif;
-      --max-w: 64rem;
+
+      --max-w: 72rem;
       --gutter: 1.25rem;
+
+      /* ── Noise grain textures — applied via ::before pseudos on every
+         meaningful surface. Two variants because the blend math differs:
+           --noise-on-dark = white-channel noise, used with soft-light
+             on dark backgrounds (lightens & darkens pixels equally,
+             reads as "printed surface").
+           --noise-on-light = dark-channel noise, used with multiply
+             on cream/light backgrounds (only darkens, reads as
+             "ink absorbed by fiber").
+         Both are SVG turbulence baked as data-URIs — zero HTTP cost,
+         tiles seamlessly, scales arbitrarily. */
+      --noise-on-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       --noise-on-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
     }
-    @media (min-width: 640px) { :root { --gutter: 1.5rem; } }
 
+    @media (min-width: 640px) { :root { --gutter: 1.5rem; } }
+    @media (min-width: 1024px) { :root { --gutter: 2rem; } }
+
+    /* ── Reset ────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; }
-    * { margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; border: 0 solid var(--border); }
     html { -webkit-text-size-adjust: 100%; color-scheme: light; scroll-behavior: smooth; }
     body {
       font-family: var(--font-sans);
@@ -75,428 +113,3484 @@
     }
     img, svg { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-    button { font: inherit; cursor: pointer; background: none; color: inherit; border: 0; }
+    button { font: inherit; cursor: pointer; background: none; color: inherit; }
     ul { list-style: none; }
-    h1, h2, h3 { letter-spacing: -0.022em; font-weight: 600; line-height: 1.1; }
+    h1, h2, h3, h4 {
+      letter-spacing: -0.022em;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+    /* Garamond Italic globally for every <em> on the page. This is the
+       core typographic move — italic accents flip from sans italic
+       (Iowan/Helvetica fallback) to a true Renaissance italic with
+       its own caps, ligatures, and rhythm. */
+    /* Garamond italic is reserved for display HEADINGS only — on small
+       body text the light serif italic reads poorly. Body <em> therefore
+       stays in the page sans (just italic for emphasis); only heading
+       <em> below opt back into the serif. */
+    em {
+      font-style: italic;
+      font-weight: 400;
+    }
+    .hero__baseline em,
+    .section__title em,
+    .problem__title em,
+    .credibility__title em,
+    .countdown-card__date em,
+    .final-cta h2 em,
+    .payment-modal__title em {
+      font-family: var(--font-serif);
+    }
+    time, .tabular { font-variant-numeric: tabular-nums; }
 
-    /* Garamond italic — HEADINGS only (legibility on body kept in sans). */
-    em { font-style: italic; font-weight: 400; }
-    .h-serif em { font-family: var(--font-serif); color: var(--primary); }
+    /* ── Layout primitives ────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
 
-    .container { width: 100%; max-width: var(--max-w); margin-inline: auto; padding-inline: var(--gutter); }
+    /* ── Mono preheader — the "/ LABEL" rhythm from academia ──── */
     .preheader {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted-foreground);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .preheader > .slash { opacity: 0.6; }
+
+    /* ── Buttons ─────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.1rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease-out, background 0.2s, box-shadow 0.2s, border-color 0.2s;
+      will-change: transform;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:active { transform: translateY(1px) scale(0.99); }
+
+    /* Primary button — solid teal, tiny inset bottom shadow for the
+       subtle "raised key" feel à la Supabase. NO outer drop shadow. */
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: inset 0 -1px 0 0 oklch(0 0 0 / 18%);
+    }
+    .btn-primary:hover {
+      background: var(--primary-strong);
+      box-shadow: inset 0 -1px 0 0 oklch(0 0 0 / 22%);
+    }
+
+    .btn-outline {
+      background: var(--card);
+      color: var(--foreground);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-outline:hover { background: var(--muted); border-color: oklch(0 0 0 / 22%); }
+
+    .btn-lg { padding: 1rem 1.4rem; font-size: 1rem; border-radius: var(--radius-md); }
+    .btn-sm { padding: 0.5rem 0.85rem; font-size: 0.85rem; }
+
+    /* ── Cards ───────────────────────────────────────────────── */
+    .card {
+      background: oklch(0.17 0 0 / 70%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+      padding: 1.75rem;
+      transition: transform 0.3s ease-out, border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+    /* Hover lift via transform + border-color shift only. No shadow.
+       The teal border highlight is enough signal for "this is hoverable". */
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: oklch(0.5 0.10 175 / 40%);
+      background: var(--card);
+      box-shadow: none;
+    }
+
+    /* ── Backdrop: dot-grid + green-glow pulse (academia signature) ── */
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .backdrop::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* Dark dots on light cream — Supabase's signature subtle grid. */
+      background-image: radial-gradient(circle, oklch(0 0 0 / 14%) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.5;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 40%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 40%, transparent 90%);
+    }
+    .backdrop::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: -8rem;
+      height: 32rem;
+      /* Soft teal wash at the top of the hero/final-cta — supabase-style
+         glow that hints at the brand without dominating. */
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, oklch(0.5 0.10 175 / 12%) 0%, transparent 70%);
+      animation: glow-pulse 5s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .backdrop::after { animation: none; }
+      * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+
+    /* ── Fade-up reveal (driven by IntersectionObserver in JS) ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms ease-out, transform 700ms ease-out;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Scroll progress bar (top of viewport) ───────────────── */
+    .scroll-progress {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      height: 2px;
+      z-index: 70;
+      pointer-events: none;
+    }
+    .scroll-progress > div {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 75ms linear;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       NAV — sticky, transparent → blurred on scroll
+       ════════════════════════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+    }
+    .nav.is-scrolled {
+      background: oklch(0.98 0.004 80 / 78%);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom-color: var(--border);
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 1rem;
+    }
+    .nav__logo {
+      display: inline-flex;
+      align-items: center;
+      color: var(--foreground);
+    }
+    /* Full VISIBLE wordmark SVG — sized by height so it stays crisp at
+       any DPR. The 4.13:1 viewBox aspect (1029:249) auto-resolves the
+       width. 22px tall matches the original inline-mark scale. */
+    .nav__logo-img {
+      height: 22px;
+      width: auto;
+      display: block;
+    }
+    .nav__meta {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) { .nav__meta { display: inline-block; } }
+    .nav__meta span { color: var(--foreground); }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO
+       ════════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding-top: 7.5rem;
+      padding-bottom: 5rem;
+    }
+    @media (min-width: 1024px) {
+      .hero { padding-top: 11rem; padding-bottom: 8rem; }
+    }
+    .hero__inner {
+      position: relative;
+      display: grid;
+      gap: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .hero__inner { grid-template-columns: 1.05fr 0.95fr; gap: 4rem; align-items: center; }
+    }
+    /* Hero H1 — the actual VISIBLE wordmark SVG. The H1 stays semantic
+       for SEO/a11y (alt="VISIBLE" gives it text content), and the inner
+       <img> scales by height so the brand letterforms hit clamp() the
+       same way the previous text-based H1 did. Aspect 4.13:1 means a
+       100px height → ~413px width. */
+    .hero__title {
+      margin-top: 1.5rem;
+      line-height: 1;
+      font-size: 0;
+    }
+    .hero__title-img {
+      height: clamp(3.5rem, 13vw, 8rem);
+      width: auto;
+      display: block;
+      max-width: 100%;
+    }
+    /* Hero baseline — the brand tagline, sits right under the wordmark
+       (brief §5.2). Garamond italic on the payoff word ("demandé")
+       matches the editorial em-accent used everywhere else. */
+    .hero__baseline {
+      margin-top: 1.1rem;
+      max-width: 30rem;
+      font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--foreground);
+    }
+    .hero__baseline em {
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--primary);
+    }
+    .hero__sub {
+      margin-top: 1.75rem;
+      color: var(--foreground);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      max-width: 30rem;
+      line-height: 1.45;
+      font-weight: 400;
+    }
+    /* Italic emphasis inside the sub — same trick as Tom's hero where
+       the key phrase ("an offer you can sell") lifts off in italic.
+       System serif fallback chain avoids loading another webfont. */
+    .hero__sub em {
+      font-style: italic;
+      color: oklch(0.45 0.10 175);
+      font-weight: 400;
+    }
+    .hero__deliver {
+      margin-top: 1.25rem;
+      padding: 0.85rem 1rem;
+      background: oklch(0.62 0.09 175 / 8%);
+      border: 1px solid oklch(0.62 0.09 175 / 22%);
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      max-width: 36rem;
+      color: var(--foreground);
+    }
+    .hero__deliver-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.10 175);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .hero__ctas {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) { .hero__ctas { flex-direction: row; } }
+    .hero__microcopy {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted-foreground);
+    }
+    .hero__microcopy span { color: var(--primary); opacity: 0.8; }
+
+    /* ── Hero image placeholder (right column) ───────────────── */
+    .hero__visual {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-2xl);
+      border: 1px dashed oklch(1 0 0 / 14%);
+      background:
+        radial-gradient(circle at 30% 30%, oklch(0.62 0.09 175 / 22%), transparent 60%),
+        radial-gradient(circle at 80% 80%, oklch(0.62 0.09 175 / 12%), transparent 70%),
+        linear-gradient(160deg, oklch(0.18 0 0), oklch(0.11 0 0));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 30px 80px -30px oklch(0.62 0.09 175 / 30%);
+    }
+    .hero__visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, oklch(0.65 0 0 / 14%) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.5;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 90%);
+    }
+    .hero__visual-inner {
+      position: relative;
+      text-align: center;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.85rem;
+      color: oklch(0.85 0 0 / 70%);
+    }
+    .hero__visual-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: oklch(0.62 0.09 175 / 14%);
+      border: 1px solid oklch(0.62 0.09 175 / 30%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+    .hero__visual-icon svg { width: 24px; height: 24px; }
+    .hero__visual-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .hero__visual-title {
+      font-size: 1.05rem;
+      color: var(--foreground);
+      max-width: 24rem;
+    }
+    .hero__visual-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: oklch(0.65 0 0 / 60%);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO RIGHT COLUMN — filled brand-teal countdown card on top,
+       cream Blueprint preview underneath. Mirrors Tom's structure
+       where the right column is two stacked rectangles, not a single
+       image. The filled card on the dark page reads as a premium
+       artifact (like a credit card), the cream card pops on dark.
+       ════════════════════════════════════════════════════════════ */
+    .hero__right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* The big teal card — premium card aesthetic.
+       Four stacked treatments produce the "embossed laminated paper"
+       feel that flat gradients can't:
+         1. Warm cream highlight (corner light catching the lacquer)
+         2. Cool teal bloom from opposite corner (secondary light)
+         3. Subtle center mid-tone wash (avoids flat-gradient look)
+         4. Base diagonal gradient (the substrate color)
+       Then ::before stamps a soft-light noise grain on top — that's
+       the single biggest tactility upgrade vs the previous flat card.
+       Shadows: inner top highlight + inner bottom darkness simulate
+       a physical edge bevel; outer shadow stack mixes ambient drop
+       with a saturated teal halo that "lifts" the card off the dark page. */
+    /* Hero teal countdown card. Stays as the filled dark-teal surface
+       (visual anchor for the page), but shadow stripped — the dark
+       teal substrate already pops hard on the cream page, no elevation
+       needed. Just a thin lighter teal hairline on top edge to suggest
+       "lit edge of a printed card" without resorting to a drop shadow. */
+    .countdown-card {
+      position: relative;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse 80% 55% at 100% 0%, oklch(0.55 0.06 80 / 22%), transparent 60%),
+        radial-gradient(ellipse 80% 60% at 0% 100%, oklch(0.5 0.10 175 / 55%), transparent 65%),
+        radial-gradient(circle at 50% 50%, oklch(0.40 0.08 175 / 22%), transparent 80%),
+        linear-gradient(155deg, oklch(0.36 0.08 175) 0%, oklch(0.22 0.06 175) 100%);
+      border: 1px solid oklch(0.45 0.08 175 / 80%);
+      border-radius: var(--radius-2xl);
+      padding: 1.5rem;
+      color: oklch(0.96 0 0);
+      box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 8%);
+      overflow: hidden;
+    }
+    /* SVG-fractal noise → soft-light blend. Imperceptible individually,
+       transformative collectively: gives the card "printed paper" grain
+       that catches the eye as not-flat without you knowing why. */
+    .countdown-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--noise-on-dark);
+      opacity: 0.55;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    /* Promote all direct children above the noise pseudo. */
+    .countdown-card > * { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .countdown-card { padding: 1.75rem; } }
+
+    .countdown-card__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .countdown-card__head-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.85 0.05 175);
+    }
+    .countdown-card__head-right {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.75 0.04 175);
+    }
+    .countdown-card__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: oklch(0.92 0.04 80);
+      box-shadow: 0 0 0 4px oklch(0.92 0.04 80 / 18%);
+      animation: live-pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 4px oklch(0.92 0.04 80 / 18%); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 8px oklch(0.92 0.04 80 / 8%); }
+    }
+
+    /* Big date title — "Samedi 1 août 2026" with italic on the
+       date number. Serif system fallback for the italic chunk. */
+    .countdown-card__date {
+      margin-top: 1.1rem;
+      font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: oklch(0.97 0 0);
+    }
+    .countdown-card__date em {
+      font-style: italic;
+      font-family: var(--font-serif);
+      color: oklch(0.88 0.04 80);
+      font-weight: 400;
+    }
+    .countdown-card__date-sub {
+      margin-top: 0.5rem;
+      font-size: 0.92rem;
+      color: oklch(0.78 0.04 175);
+    }
+
+    /* Countdown — no boxes around each unit, just numbers + labels
+       separated by horizontal hairlines top + bottom. Numbers go big. */
+    /* Default countdown styling — dark text on white surface. Used by
+       the final-cta white card. The hero's dark-teal countdown card
+       overrides these via `.countdown-card .countdown__*` selectors. */
+    .countdown {
+      margin-top: 1.5rem;
+      padding-block: 1.25rem;
+      border-block: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .countdown__unit {
+      text-align: left;
+      padding: 0;
+      background: none;
+      border: 0;
+    }
+    .countdown__value {
+      font-weight: 600;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--foreground);
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown__label {
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    /* Inside the hero's dark-teal countdown card, flip back to light text */
+    .countdown-card .countdown { border-block-color: oklch(1 0 0 / 12%); }
+    .countdown-card .countdown__value { color: oklch(0.97 0 0); }
+    .countdown-card .countdown__label { color: oklch(0.72 0.04 175); }
+
+    /* Bottom row: seat price (left) + "Réserver" cream button (right). */
+    .countdown-card__seat {
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .countdown-card__seat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.78 0.04 175);
+    }
+    .countdown-card__seat-price {
+      margin-top: 0.35rem;
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: oklch(0.97 0 0);
+      line-height: 1;
+    }
+    .countdown-card__seat-price em {
+      font-style: italic;
+      font-size: 0.62em;
+      color: oklch(0.78 0.04 175);
+      font-weight: 400;
+      margin-left: 0.25rem;
+    }
+    /* Cream-on-teal CTA button — local to the countdown card */
+    .btn-cream {
+      background: oklch(0.94 0.03 80);
+      color: oklch(0.25 0.06 175);
+      box-shadow: inset 0 -1px 0 0 oklch(0.7 0.05 80 / 35%);
+    }
+    .btn-cream:hover {
+      background: oklch(0.98 0.02 80);
+      box-shadow: inset 0 -1px 0 0 oklch(0.7 0.05 80 / 50%);
+    }
+
+    /* ── BLUEPRINT PREVIEW CARD — cream on dark, sits below the
+       countdown card. Mini thumbnail (left) + copy (right). Clickable —
+       jumps to the full Blueprint section anchor. */
+    /* Cream "paper card pinned to a dark wall" — same tactility logic
+       as the teal card, swapped warm:
+         - top-down warm gradient (0.97 cream → 0.93 cream)
+         - paper grain via SVG noise in multiply mode (darkens for grain
+           the way ink saturates fiber, instead of soft-light's lightening)
+         - inner top highlight + bottom shadow for the laminate edge
+         - drop shadow tinted slightly green to harmonize with the teal card
+           directly above it (not pure black — would feel disconnected). */
+    /* Cream blueprint preview card. Border-only; no shadow. The cream
+       substrate paired with the dark teal countdown card above already
+       provides ample contrast against the cream page. */
+    .blueprint-preview {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 1.1rem;
+      align-items: center;
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 0%, oklch(0.97 0.018 80), transparent 70%),
+        linear-gradient(180deg, oklch(0.96 0.015 80) 0%, oklch(0.93 0.018 80) 100%);
+      border: 1px solid oklch(0 0 0 / 14%);
+      border-radius: var(--radius-2xl);
+      padding: 1.2rem;
+      color: oklch(0.18 0 0);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s ease-out;
+      box-shadow: none;
+      overflow: hidden;
+    }
+    .blueprint-preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--noise-on-light);
+      opacity: 0.45;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .blueprint-preview > * { position: relative; z-index: 1; }
+    .blueprint-preview:hover {
+      transform: translateY(-2px);
+      border-color: oklch(0 0 0 / 24%);
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 0%, oklch(0.98 0.018 80), transparent 70%),
+        linear-gradient(180deg, oklch(0.97 0.015 80) 0%, oklch(0.94 0.018 80) 100%);
+    }
+    /* Mini blueprint thumbnail — repeating horizontal lines mimic a
+       filled-out worksheet seen from far away. Brand-color top stripe
+       reads as the document header. */
+    .blueprint-preview__thumb {
+      width: 72px;
+      height: 90px;
+      border-radius: 6px;
+      background: oklch(0.32 0.07 175);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px oklch(0 0 0 / 18%);
+    }
+    .blueprint-preview__thumb::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      inset-inline: 0;
+      height: 14px;
+      background: oklch(0.45 0.08 175);
+      border-bottom: 1px solid oklch(0.55 0.08 175);
+    }
+    .blueprint-preview__thumb::after {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      background:
+        linear-gradient(to bottom,
+          oklch(0.78 0.06 175) 0, oklch(0.78 0.06 175) 3px, transparent 3px, transparent 9px,
+          oklch(0.78 0.06 175) 9px, oklch(0.78 0.06 175) 12px, transparent 12px, transparent 18px,
+          oklch(0.78 0.06 175) 18px, oklch(0.78 0.06 175) 21px, transparent 21px, transparent 27px,
+          oklch(0.78 0.06 175) 27px, oklch(0.78 0.06 175) 30px, transparent 30px, transparent 36px,
+          oklch(0.78 0.06 175) 36px, oklch(0.78 0.06 175) 39px, transparent 39px, transparent 45px,
+          oklch(0.78 0.06 175) 45px, oklch(0.78 0.06 175) 48px, transparent 48px);
+      opacity: 0.55;
+    }
+    .blueprint-preview__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.05 175);
+    }
+    .blueprint-preview__title {
+      margin-top: 0.3rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      color: oklch(0.15 0 0);
+      line-height: 1.2;
+    }
+    .blueprint-preview__body {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: oklch(0.4 0 0);
+      line-height: 1.45;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       SECTIONS
+       ════════════════════════════════════════════════════════════ */
+    section { position: relative; }
+    .section {
+      padding-block: 4.5rem;
+    }
+    @media (min-width: 1024px) { .section { padding-block: 6.5rem; } }
+    .section--tight { padding-block: 3rem; }
+    .section--alt { background: var(--background-alt); border-block: 1px solid var(--border); }
+
+    .section__header {
+      max-width: 42rem;
+      margin-inline: auto;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section__title {
+      margin-top: 1rem;
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      line-height: 1.1;
+    }
+    .section__lead {
+      margin-top: 1rem;
+      color: var(--muted-foreground);
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      line-height: 1.55;
+    }
+
+    /* ── PROBLEM ─────────────────────────────────────────────── */
+    .problem {
+      max-width: 46rem;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .problem__title {
+      font-size: clamp(1.75rem, 5vw, 3rem);
+      line-height: 1.1;
+      margin-top: 1rem;
+    }
+    .problem__title em { color: var(--primary); }
+    .problem__body {
+      margin-top: 1.5rem;
+      color: var(--muted-foreground);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    /* ── TL;DR — 5 condensed bullets ─────────────────────────── */
+    .tldr {
+      display: grid;
+      gap: 0.75rem;
+      max-width: 48rem;
+      margin-inline: auto;
+    }
+    .tldr__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 1.1rem 1.25rem;
+      background: oklch(0.16 0 0 / 60%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .tldr__icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: oklch(0.62 0.09 175 / 14%);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tldr__icon svg { width: 16px; height: 16px; }
+    .tldr__text { color: var(--foreground); font-size: 0.95rem; }
+    .tldr__text strong { font-weight: 500; }
+
+    /* ── 3 BLOCKS — what you'll build ────────────────────────── */
+    .blocks {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) { .blocks { grid-template-columns: repeat(3, 1fr); } }
+    .block__num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .block__time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+    .block__title {
+      font-size: 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .block__body {
+      margin-top: 0.75rem;
+      color: var(--muted-foreground);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .block__separator {
+      margin-block: 1rem 0.5rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── VALUE STACK ─────────────────────────────────────────── */
+    .stack {
+      max-width: 40rem;
+      margin-inline: auto;
+      background: linear-gradient(180deg, oklch(0.17 0 0 / 90%), oklch(0.13 0 0 / 95%));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-2xl);
+      padding: 2rem;
+    }
+    @media (min-width: 768px) { .stack { padding: 2.5rem; } }
+    .stack__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding-block: 0.9rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .stack__row:last-of-type { border-bottom: 0; }
+    .stack__label { color: var(--foreground); font-size: 0.95rem; }
+    .stack__value {
+      font-family: var(--font-mono);
+      color: var(--muted-foreground);
+      font-size: 0.9rem;
+      font-variant-numeric: tabular-nums;
+    }
+    .stack__total {
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-strong);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .stack__total-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .stack__total-strike {
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      color: var(--muted-foreground);
+      text-decoration: line-through;
+      text-decoration-color: var(--destructive);
+      text-decoration-thickness: 2px;
+    }
+    .stack__price {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: oklch(0.62 0.09 175 / 8%);
+      border: 1px dashed oklch(0.62 0.09 175 / 40%);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+    .stack__price-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.10 175);
+    }
+    .stack__price-big {
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 7vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--foreground);
+    }
+    .stack__price-big sup {
+      font-size: 0.4em;
+      color: var(--muted-foreground);
+      margin-left: 0.25rem;
+      vertical-align: super;
+    }
+    .stack__price-fcfa {
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--muted-foreground);
+    }
+    .stack__cta { margin-top: 1.5rem; width: 100%; }
+
+    /* ── TICKET — visual ticket motif (academia signature) ───── */
+    .ticket-wrap {
+      max-width: 44rem;
+      margin-inline: auto;
+      position: relative;
+    }
+    .ticket {
+      position: relative;
+      background:
+        linear-gradient(180deg, oklch(0.18 0 0), oklch(0.14 0 0));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-2xl);
+      padding: 2rem;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -30px oklch(0.62 0.09 175 / 30%);
+    }
+    @media (min-width: 640px) { .ticket { padding: 2.5rem; } }
+    .ticket::before,
+    .ticket::after {
+      content: "";
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--background);
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid var(--border-strong);
+    }
+    .ticket::before { left: -16px; }
+    .ticket::after { right: -16px; }
+    .ticket__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .ticket__brand {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .ticket__brand strong { color: var(--foreground); font-weight: 500; }
+    .ticket__number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .ticket__body {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .ticket__body { grid-template-columns: 1.5fr 1fr; } }
+    .ticket__title {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
+    .ticket__title em { color: var(--primary); }
+    /* The VISIBLE wordmark inside the ticket title. Sized to clamp the
+       same way as the H1 used to scale, so the ticket reads as the
+       branded artifact of the workshop, not a generic header. */
+    .ticket__title-img {
+      height: clamp(2.2rem, 5vw, 3.2rem);
+      width: auto;
+      display: block;
+    }
+    .ticket__meta {
+      display: grid;
+      gap: 0.75rem;
+      align-content: start;
+    }
+    .ticket__meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding-block: 0.4rem;
+      border-bottom: 1px dotted var(--border);
+    }
+    .ticket__meta-row span:first-child {
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 10px;
+    }
+    .ticket__meta-row span:last-child { color: var(--foreground); }
+    .ticket__price-row span:last-child { color: var(--primary); font-weight: 500; }
+    .ticket__included {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+    }
+    .ticket__included-head {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+    .ticket__included ul {
+      display: grid;
+      gap: 0.5rem;
+    }
+    @media (min-width: 640px) { .ticket__included ul { grid-template-columns: 1fr 1fr; } }
+    .ticket__included li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted-foreground);
+    }
+    .ticket__included li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .ticket__barcode {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+    .ticket__barcode-bars {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      flex: 1;
+      height: 28px;
+    }
+    .ticket__barcode-bars > i {
+      display: block;
+      background: var(--foreground);
+      width: 2px;
+      height: 100%;
+    }
+    .ticket__barcode-id {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--muted-foreground);
+    }
+
+    /* ── TIMEZONES ───────────────────────────────────────────── */
+    .tz {
+      max-width: 44rem;
+      margin-inline: auto;
+    }
+    .tz__local {
+      padding: 1.25rem 1.5rem;
+      background: oklch(0.62 0.09 175 / 8%);
+      border: 1px solid oklch(0.62 0.09 175 / 22%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .tz__local-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.10 175);
+    }
+    .tz__local-value {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--foreground);
+    }
+    .tz__list {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .tz__row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: oklch(0.16 0 0 / 60%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      align-items: baseline;
+    }
+    .tz__city {
+      font-size: 0.92rem;
+      color: var(--foreground);
+    }
+    .tz__city small {
+      display: block;
+      color: var(--muted-foreground);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+    .tz__time {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--foreground);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── ALEX ────────────────────────────────────────────────── */
+    .prof {
+      max-width: 56rem;
+      margin-inline: auto;
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .prof { grid-template-columns: 0.8fr 1.2fr; gap: 3rem; } }
+    .prof__photo {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-2xl);
+      background:
+        radial-gradient(circle at 30% 30%, oklch(0.62 0.09 175 / 30%), transparent 60%),
+        linear-gradient(160deg, oklch(0.22 0 0), oklch(0.11 0 0));
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: oklch(0.65 0 0 / 50%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .prof__photo::after {
+      content: "/ PHOTO ALEX";
+    }
+    .prof__title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 1.1;
+    }
+    .prof__title em { color: var(--primary); }
+    .prof__sub {
+      margin-top: 0.5rem;
       font-family: var(--font-mono);
       font-size: 12px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted-foreground);
-      display: flex; align-items: center; gap: 0.4rem;
     }
-    .preheader .slash { color: var(--primary); }
-
-    /* ── Buttons ── */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      font-weight: 500; border-radius: var(--radius-md); line-height: 1; text-align: center;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-    .btn svg { width: 18px; height: 18px; }
-    .btn-primary { background: var(--primary); color: var(--primary-foreground); }
-    .btn-primary:hover { background: var(--primary-strong); }
-    .btn-sm { padding: 0.6rem 0.95rem; font-size: 0.9rem; }
-    .btn-lg { padding: 1rem 1.4rem; font-size: 1.02rem; width: 100%; }
-    .btn-ghost { color: var(--foreground); border: 1px solid var(--border-strong); }
-    .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
-
-    /* ── Nav ── */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(1.4) blur(10px);
-      background: oklch(0.98 0.004 80 / 80%);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav__inner { display: flex; align-items: center; justify-content: space-between; padding-block: 0.8rem; }
-    .nav__logo-img { height: 20px; width: auto; }
-
-    /* ── Hero ── */
-    .hero { position: relative; overflow: hidden; padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem); }
-    .hero__bg {
-      position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(60% 50% at 15% 0%, var(--primary-soft), transparent 70%),
-        radial-gradient(50% 40% at 100% 10%, oklch(0.5 0.10 175 / 6%), transparent 70%);
-    }
-    .hero__grid { position: relative; z-index: 1; display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
-    @media (min-width: 880px) { .hero__grid { grid-template-columns: 1.05fr 0.95fr; } }
-
-    .hero__core {
+    .prof__bio {
       margin-top: 1.25rem;
-      font-size: clamp(2.2rem, 7vw, 4rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      color: var(--muted-foreground);
+      line-height: 1.7;
     }
-    .hero__sub-h {
-      margin-top: 1.75rem;
-      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
+    .prof__chips {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    .hero__lead {
-      margin-top: 0.75rem;
-      max-width: 32rem;
-      color: var(--foreground-soft);
-      font-size: clamp(1rem, 1.7vw, 1.12rem);
-      line-height: 1.5;
-    }
-    .hero__trust {
-      margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem;
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--muted-foreground);
-    }
-    .hero__trust span { display: inline-flex; align-items: center; gap: 0.35rem; }
-    .hero__trust .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); }
-
-    /* ── Form card ── */
-    .form-card {
-      position: relative; isolation: isolate; overflow: hidden;
+    .prof__chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      color: var(--foreground);
       background: var(--card);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    .footer {
+      padding-block: 3rem;
+      border-top: 1px solid var(--border);
+      background: var(--background-alt);
+      padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+    }
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted-foreground);
+      font-size: 0.85rem;
+    }
+    .footer__nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .footer__nav a:hover { color: var(--foreground); }
+    .footer__brand {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ── MOBILE STICKY CTA BAR ──────────────────────────────── */
+    .mobile-cta {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 55;
+      padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+      background: oklch(0.98 0.004 80 / 88%);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border-top: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      transform: translateY(120%);
+      transition: transform 0.4s ease-out;
+    }
+    .mobile-cta.is-visible { transform: translateY(0); }
+    @media (min-width: 768px) { .mobile-cta { display: none; } }
+    .mobile-cta__meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      line-height: 1.2;
+    }
+    .mobile-cta__meta strong { color: var(--foreground); display: block; font-weight: 500; font-size: 13px; }
+
+    /* ── Footer spacer so mobile CTA doesn't cover content ──── */
+    .mobile-spacer { height: 4.5rem; }
+    @media (min-width: 768px) { .mobile-spacer { display: none; } }
+
+    /* ── Icon helper ─────────────────────────────────────────── */
+    .icon-16 { width: 16px; height: 16px; }
+    .icon-18 { width: 18px; height: 18px; }
+
+    /* ════════════════════════════════════════════════════════════
+       Tom-structure sections: worksheet, credibility, cases.
+       ════════════════════════════════════════════════════════════ */
+
+    /* ── WORKSHEET — single-feature highlight (the deliverable) ── */
+    .worksheet {
+      max-width: 56rem;
+      margin-inline: auto;
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .worksheet { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+    .worksheet__title {
+      font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+      line-height: 1.1;
+      margin-top: 1rem;
+    }
+    .worksheet__title em { color: var(--primary); }
+    .worksheet__body {
+      margin-top: 1.25rem;
+      color: var(--muted-foreground);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .worksheet__body strong { color: var(--foreground); font-weight: 500; }
+    .worksheet__mock {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--border-strong);
+      background:
+        radial-gradient(circle at 20% 0%, oklch(0.62 0.09 175 / 18%), transparent 60%),
+        linear-gradient(180deg, oklch(0.20 0 0), oklch(0.12 0 0));
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px -30px oklch(0.62 0.09 175 / 30%);
+    }
+    .worksheet__mock-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .worksheet__mock-brand {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .worksheet__mock-id {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+    }
+    .worksheet__mock-rows {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .worksheet__mock-row {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      column-gap: 0.85rem;
+      row-gap: 0.5rem;
+      align-items: start;
+      padding: 0.9rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .worksheet__mock-row:last-child { border-bottom: 0; }
+
+    /* Checkmark indicator — filled green disk for "done", empty
+       ring for "pending". The ::after CSS-only check sits inside
+       the disk and uses two borders to render a tick. */
+    .worksheet__mock-check {
+      margin-top: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid oklch(0.45 0 0);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .worksheet__mock-row--done .worksheet__mock-check {
+      background: oklch(0.62 0.09 175);
+      border-color: oklch(0.62 0.09 175);
+    }
+    .worksheet__mock-row--done .worksheet__mock-check::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 4px;
+      height: 8px;
+      border-right: 1.5px solid var(--foreground);
+      border-bottom: 1.5px solid var(--foreground);
+      transform: rotate(45deg);
+    }
+
+    .worksheet__mock-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.10 175);
+      align-self: center;
+      margin-top: 1px;
+    }
+    .worksheet__mock-row:not(.worksheet__mock-row--done) .worksheet__mock-label {
+      color: oklch(0.55 0 0);
+    }
+
+    /* Filled answer: italic serif gives the "written by hand" feel
+       without needing a webfont — falls back through system serifs. */
+    .worksheet__mock-answer {
+      grid-column: 2;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--foreground);
+      line-height: 1.45;
+    }
+    .worksheet__mock-pending {
+      grid-column: 2;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: oklch(0.45 0 0);
+      text-transform: uppercase;
+    }
+
+    /* ── CREDIBILITY — "Why listen to me" stats grid ─────────── */
+    .credibility {
+      max-width: 60rem;
+      margin-inline: auto;
+      display: grid;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .credibility { grid-template-columns: 1.2fr 0.8fr; gap: 3rem; } }
+    .credibility__title {
+      font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+      line-height: 1.1;
+      margin-top: 1rem;
+    }
+    .credibility__title em { color: var(--primary); }
+    .credibility__lead {
+      margin-top: 1rem;
+      color: var(--muted-foreground);
+      line-height: 1.65;
+    }
+    .credibility__stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .credibility__stat {
+      padding: 1.25rem;
+      background: oklch(0.16 0 0 / 70%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .credibility__stat-num {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--foreground);
+      font-variant-numeric: tabular-nums;
+    }
+    .credibility__stat-num em { color: var(--primary); }
+    .credibility__stat-label {
+      margin-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .credibility__photo {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-2xl);
+      background:
+        radial-gradient(circle at 30% 30%, oklch(0.62 0.09 175 / 28%), transparent 60%),
+        linear-gradient(160deg, oklch(0.22 0 0), oklch(0.11 0 0));
+      border: 1px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: oklch(0.65 0 0 / 50%);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    /* ── MARQUEE — infinite logo band scrolling left. Replaces the static
+       portfolio grid (brief §5.9): a continuous loop of LogoMint client
+       logos. The track holds TWO identical groups; translateX(-50%) shifts
+       it by exactly one group width → seamless loop. Pauses on hover.
+       Swap each .marquee__logo <div> for <img class="marquee__logo" …>. ── */
+    .marquee {
+      position: relative;
+      overflow: hidden;
+      padding-block: 0.5rem;
+      /* edge fade so logos ease in/out at the borders */
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+    }
+    .marquee__track {
+      display: flex;
+      width: max-content;
+      animation: marquee-left 55s linear infinite;
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    .marquee__group {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      padding-right: 3rem;   /* must equal gap so spacing is uniform across the loop seam */
+      flex-shrink: 0;
+    }
+    @media (min-width: 768px) {
+      .marquee__group { gap: 5rem; padding-right: 5rem; }
+    }
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    /* Logo — height-normalized monochrome wordmark, muted then full ink
+       on hover (classic logo-cloud). To add/replace a client, drop an
+       <img class="marquee__logo" src="logos/…svg" alt="Nom" loading="lazy">
+       into BOTH groups in the markup. */
+    .marquee__logo {
+      flex-shrink: 0;
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.6;
+      transition: opacity 0.3s ease, transform 0.3s ease-out;
+    }
+    @media (min-width: 768px) { .marquee__logo { height: 34px; } }
+    .marquee__logo:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+    /* Reduced motion — no scroll; lay the logos out as a centered wrap
+       and drop the duplicate group. !important beats the global
+       animation-duration override above. */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { -webkit-mask-image: none; mask-image: none; }
+      .marquee__track {
+        animation: none !important;
+        transform: none !important;
+        width: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .marquee__group { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+      .marquee__group[aria-hidden="true"] { display: none; }
+    }
+    /* Closing link — minimal, centered, card-less (just a quiet text
+       link with an arrow that nudges on hover). */
+    .portfolio__foot {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .portfolio__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--foreground);
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--border-strong);
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+    .portfolio__link svg { width: 16px; height: 16px; transition: transform 0.25s ease; }
+    .portfolio__link:hover { color: var(--primary); border-color: var(--primary); }
+    .portfolio__link:hover svg { transform: translateX(3px); }
+
+    /* ── Stack row variant for live-only bonuses ─────────────── */
+    .stack__row--bonus .stack__label::after {
+      content: "BONUS EN DIRECT";
+      display: inline-block;
+      margin-left: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: oklch(0.62 0.09 175 / 14%);
+      color: oklch(0.45 0.10 175);
+      vertical-align: middle;
+    }
+
+    /* ── Stack row variant for the star deliverable (Brand Blueprint).
+       Highlights the row with a thicker green left edge + bold label
+       so the eye lands on it first in the value stack scan. */
+    .stack__row--star {
+      margin-inline: -0.5rem;
+      padding-inline: 0.85rem;
+      background: oklch(0.62 0.09 175 / 10%);
+      border-left: 3px solid oklch(0.62 0.09 175);
+      border-radius: var(--radius);
+      border-bottom-color: transparent;
+    }
+    .stack__row--star .stack__label { color: var(--foreground); font-weight: 500; }
+    .stack__row--star .stack__label::before {
+      content: "★ LIVRABLE PHARE";
+      display: inline-block;
+      margin-right: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: oklch(0.85 0.11 175 / 20%);
+      color: oklch(0.45 0.10 175);
+      vertical-align: middle;
+    }
+    .stack__row--star .stack__value { color: var(--foreground); }
+
+    /* ════════════════════════════════════════════════════════════
+       BRAND BLUEPRINT — deliverable mockup (4 quadrants on a single page).
+       Reads as "the actual one-page document you walk away with."
+       ════════════════════════════════════════════════════════════ */
+    .blueprint {
+      max-width: 56rem;
+      margin-inline: auto;
+      background: linear-gradient(180deg, oklch(0.17 0 0 / 90%), oklch(0.13 0 0 / 95%));
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-2xl);
-      padding: clamp(1.5rem, 3.5vw, 2rem);
-      box-shadow: 0 1px 0 oklch(1 0 0 / 60%) inset;
+      padding: 1.75rem;
+      box-shadow:
+        0 0 0 1px oklch(1 0 0 / 3%),
+        0 30px 80px -30px oklch(0.62 0.09 175 / 35%);
     }
-    .form-card::before { content:""; position:absolute; inset:0; background-image: var(--noise-on-light); opacity: 0.28; mix-blend-mode: multiply; pointer-events:none; border-radius: inherit; }
-    .form-card > * { position: relative; z-index: 1; }
-    .form-card__label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--primary); }
-    .form-card__title { margin-top: 0.5rem; font-size: clamp(1.4rem, 3vw, 1.8rem); }
-    .form-card__title small { display:block; font-weight:400; font-size: 0.95rem; color: var(--muted-foreground); letter-spacing: 0; margin-top: 0.3rem; }
-    .field { display: block; margin-top: 1rem; }
-    .field span { display: block; font-size: 0.82rem; font-weight: 500; color: var(--foreground-soft); margin-bottom: 0.3rem; }
-    .field span em { color: var(--tertiary); font-weight: 400; }
-    .field input {
-      width: 100%; font: inherit; color: var(--foreground);
-      background: var(--background); border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md); padding: 0.8rem 0.9rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+    @media (min-width: 768px) { .blueprint { padding: 2.5rem; } }
+
+    .blueprint__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px dashed var(--border);
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
-    .field input::placeholder { color: var(--tertiary); }
-    .field input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
-    .form-card form > .btn { margin-top: 1.25rem; }
-    .form-card__micro { margin-top: 0.85rem; font-size: 0.82rem; color: var(--muted-foreground); text-align: center; }
-    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-
-    /* success state */
-    .form-success { text-align: center; padding-block: 1rem; }
-    .form-success__icon { font-size: 2.4rem; line-height: 1; }
-    .form-success h3 { margin-top: 0.6rem; font-size: 1.5rem; }
-    .form-success p { margin-top: 0.6rem; color: var(--foreground-soft); }
-
-    /* ── Sections ── */
-    .section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
-    .section--alt { background: var(--background-alt); border-block: 1px solid var(--border); }
-    .section__head { max-width: 40rem; }
-    .section__title { margin-top: 0.6rem; font-size: clamp(1.6rem, 4vw, 2.4rem); }
-    .section__lead { margin-top: 0.6rem; color: var(--foreground-soft); font-size: 1.02rem; }
-
-    /* benefits */
-    .benefits { display: grid; gap: 1rem; margin-top: 2rem; }
-    @media (min-width: 760px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
-    .benefit {
-      position: relative; isolation: isolate; overflow: hidden;
-      background: var(--card); border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg); padding: 1.5rem;
+    .blueprint__brand {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
     }
-    .benefit__num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--primary); }
-    .benefit__icon {
-      width: 40px; height: 40px; margin-bottom: 1rem; display: grid; place-items: center;
-      border-radius: var(--radius-md); background: var(--primary-soft); color: var(--primary);
+    .blueprint__brand strong { color: var(--foreground); font-weight: 500; }
+    .blueprint__id {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: oklch(0.45 0.10 175);
     }
-    .benefit__icon svg { width: 20px; height: 20px; }
-    .benefit h3 { margin-top: 0.5rem; font-size: 1.15rem; }
-    .benefit p { margin-top: 0.5rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.55; }
-    .benefit strong { color: var(--foreground); font-weight: 500; }
 
-    /* gift showcase */
-    .gift { display: grid; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
-    @media (min-width: 820px) { .gift { grid-template-columns: 1fr 1fr; } }
-    .gift__copy h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
-    .gift__copy p { margin-top: 0.8rem; color: var(--foreground-soft); line-height: 1.6; }
-    .gift__copy .gift__alt { margin-top: 0.8rem; font-size: 0.9rem; color: var(--muted-foreground); }
-
-    /* mini blueprint mockup */
-    .mini {
-      position: relative; isolation: isolate; overflow: hidden;
-      background: var(--card); border: 1px solid var(--border-strong);
-      border-radius: var(--radius-2xl); padding: 1.4rem;
-      box-shadow: 0 20px 40px -28px oklch(0 0 0 / 35%);
-      transform: rotate(-1.2deg);
+    .blueprint__grid {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
     }
-    .mini::before { content:""; position:absolute; inset:0; background-image: var(--noise-on-light); opacity: 0.28; mix-blend-mode: multiply; pointer-events:none; border-radius: inherit; }
-    .mini > * { position: relative; z-index: 1; }
-    .mini__head { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); padding-bottom: 0.8rem; border-bottom: 1px dashed var(--border-strong); }
-    .mini__head strong { color: var(--foreground); }
-    .mini__row { padding-block: 0.85rem; border-bottom: 1px dashed var(--border); }
-    .mini__row:last-child { border-bottom: 0; }
-    .mini__k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); }
-    .mini__v { margin-top: 0.3rem; color: var(--foreground); font-size: 0.95rem; }
-    .mini__v .blank { color: var(--tertiary); }
+    @media (min-width: 640px) { .blueprint__grid { grid-template-columns: 1fr 1fr; gap: 1rem; } }
 
-    /* audience + transparency */
-    .audience { text-align: center; max-width: 46rem; margin-inline: auto; }
-    .audience h2 { font-size: clamp(1.5rem, 3.6vw, 2.1rem); }
-    .audience p { margin-top: 0.7rem; color: var(--foreground-soft); font-size: 1.05rem; }
-    .note {
-      margin: 1.75rem auto 0; max-width: 38rem;
-      background: var(--primary-soft); border: 1px solid oklch(0.5 0.10 175 / 22%);
-      border-radius: var(--radius-md); padding: 0.9rem 1.1rem;
-      font-size: 0.92rem; color: var(--foreground-soft); text-align: center;
+    .blueprint__quad {
+      padding: 1.5rem;
+      background: oklch(0.11 0 0 / 60%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
     }
-    .note strong { color: var(--foreground); font-weight: 600; }
+    .blueprint__quad-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: oklch(0.45 0.10 175);
+    }
+    .blueprint__quad-title {
+      font-size: 1.1rem;
+      color: var(--foreground);
+    }
+    .blueprint__quad-line {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-size: 0.95rem;
+      color: var(--foreground);
+      line-height: 1.45;
+    }
+    .blueprint__quad-sub {
+      margin-top: auto;
+      padding-top: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      border-top: 1px dotted var(--border);
+    }
 
-    /* final cta */
-    .final { text-align: center; }
-    .final h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); max-width: 24rem; margin-inline: auto; }
-    .final p { margin-top: 0.8rem; color: var(--foreground-soft); }
-    .final .btn { width: auto; margin-top: 1.5rem; padding-inline: 2rem; }
+    .blueprint__foot {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .blueprint__foot-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+    }
+    .blueprint__foot-value {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--foreground);
+    }
 
-    /* footer */
-    .footer { border-top: 1px solid var(--border); padding-block: 2rem; }
-    .footer__inner { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
-    .footer__brand { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-foreground); }
-    .footer__brand strong { color: var(--foreground); font-weight: 600; }
-    .footer__nav { display: flex; flex-wrap: wrap; gap: 1.25rem; font-size: 0.85rem; color: var(--muted-foreground); }
-    .footer__nav a:hover { color: var(--primary); }
+    /* ════════════════════════════════════════════════════════════
+       BONUSES — live-only bonuses dedicated section (brief 5.8).
+       Two cards, glow border + corner badge that says "LIVE ONLY"
+       so the reader can't miss the urgency hook.
+       ════════════════════════════════════════════════════════════ */
+    .bonuses {
+      max-width: 56rem;
+      margin-inline: auto;
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) { .bonuses { grid-template-columns: 1fr 1fr; } }
+    .bonus-card {
+      position: relative;
+      padding: 1.75rem;
+      background:
+        radial-gradient(circle at 100% 0%, oklch(0.62 0.09 175 / 14%), transparent 60%),
+        oklch(0.17 0 0 / 70%);
+      border: 1px solid oklch(0.62 0.09 175 / 30%);
+      border-radius: var(--radius-2xl);
+      transition: transform 0.3s ease-out, border-color 0.3s, box-shadow 0.3s;
+    }
+    .bonus-card:hover {
+      transform: translateY(-2px);
+      border-color: oklch(0.5 0.10 175 / 55%);
+      box-shadow: none;
+    }
+    .bonus-card__badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: oklch(0.62 0.09 175);
+      color: var(--primary-foreground);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .bonus-card__num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.10 175);
+    }
+    .bonus-card__title {
+      margin-top: 0.75rem;
+      font-size: 1.2rem;
+      color: var(--foreground);
+    }
+    .bonus-card__body {
+      margin-top: 0.85rem;
+      color: var(--muted-foreground);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
 
-    /* reveal */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.is-visible { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+    /* ════════════════════════════════════════════════════════════
+       AUDIENCE FIT — "Pour toi si / Pas pour toi si" two columns.
+       ════════════════════════════════════════════════════════════ */
+    .audience-grid {
+      display: grid;
+      gap: 1rem;
+      max-width: 60rem;
+      margin-inline: auto;
+    }
+    @media (min-width: 768px) { .audience-grid { grid-template-columns: 1fr 1fr; } }
+    .audience-card {
+      padding: 1.75rem;
+      background: oklch(0.16 0 0 / 70%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-2xl);
+    }
+    .audience-card__head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed var(--border);
+    }
+    .audience-card__head svg { width: 20px; height: 20px; }
+    .audience-card__head h3 {
+      font-size: 1rem;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .audience-card--yes .audience-card__head { color: var(--primary); }
+    .audience-card--no .audience-card__head { color: oklch(0.78 0.16 25); }
+    .audience-card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      padding-block: 0.55rem;
+      font-size: 0.95rem;
+      color: var(--foreground);
+      line-height: 1.5;
+    }
+    .audience-card ul li::before {
+      content: "";
+      flex-shrink: 0;
+      margin-top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .audience-card--yes ul li::before { background: var(--primary); }
+    .audience-card--no ul li::before { background: oklch(0.78 0.16 25); }
+
+    /* ════════════════════════════════════════════════════════════
+       FINAL CTA — closing reminder + countdown mirror.
+       ════════════════════════════════════════════════════════════ */
+    .final-cta-wrap {
+      position: relative;
+      overflow: hidden;
+      padding-block: 5rem;
+    }
+    @media (min-width: 1024px) { .final-cta-wrap { padding-block: 7rem; } }
+    .final-cta {
+      position: relative;
+      max-width: 48rem;
+      margin-inline: auto;
+      padding: 2.5rem;
+      background: oklch(0.17 0 0 / 60%);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-2xl);
+      backdrop-filter: blur(6px);
+      text-align: center;
+      box-shadow: 0 30px 80px -30px oklch(0.62 0.09 175 / 35%);
+    }
+    @media (min-width: 1024px) { .final-cta { padding: 4rem; } }
+    .final-cta h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      margin-top: 1rem;
+    }
+    .final-cta h2 em { color: var(--primary); }
+    .final-cta__sub {
+      margin-top: 1.25rem;
+      color: var(--muted-foreground);
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      max-width: 32rem;
+      margin-inline: auto;
+    }
+    .final-cta__countdown {
+      margin: 2rem auto 0;
+      max-width: 24rem;
+    }
+    .final-cta__ctas {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    @media (min-width: 640px) { .final-cta__ctas { flex-direction: row; } }
+    .final-cta__warning {
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: oklch(0.78 0.16 80);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       FAQ — uses native <details>/<summary> so the open/close state
+       is zero-JS and lives in the DOM, not React state. The "+" → "×"
+       toggle is the ::after pseudo rotating 45deg on [open].
+       ════════════════════════════════════════════════════════════ */
+    .faq {
+      max-width: 44rem;
+      margin-inline: auto;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .faq__item {
+      background: oklch(0.16 0 0 / 70%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq__item:hover { border-color: var(--border-strong); }
+    .faq__item[open] { border-color: oklch(0.62 0.09 175 / 30%); }
+    .faq__q {
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-weight: 500;
+      list-style: none;
+      font-size: 0.98rem;
+      color: var(--foreground);
+    }
+    .faq__q::-webkit-details-marker { display: none; }
+    .faq__q::after {
+      content: "+";
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      color: var(--muted-foreground);
+      transition: transform 0.3s, color 0.3s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq__item[open] .faq__q::after { transform: rotate(45deg); color: var(--primary); }
+    .faq__a {
+      padding: 0 1.25rem 1.25rem;
+      color: var(--muted-foreground);
+      line-height: 1.65;
+      font-size: 0.95rem;
+    }
+    .faq__a strong { color: var(--foreground); font-weight: 500; }
+
+    /* ════════════════════════════════════════════════════════════
+       VISUAL CONSISTENCY LAYER
+
+       Brings the hero cards' design vocabulary (noise grain, multi-
+       source background, inner bevel, harmonized shadow stack with a
+       teal halo) to every other meaningful surface on the page. Three
+       tiers based on conversion weight:
+
+         T1 — Premium  : .stack, .blueprint, .final-cta
+                         (where money is asked for / the deliverable
+                         is showcased / the closing pitch lives)
+         T2 — Content  : .card, .case, .bonus-card, .audience-card
+                         (the storytelling cards: programme, témoignages,
+                         bonus, fit-check)
+         T3 — List     : .tldr__item, .credibility__stat, .tz__row,
+                         .faq__item, .blueprint__quad
+                         (small repeating items — grain dialed down so
+                         they don't feel busy in a row)
+
+       Ticket is special-cased (its ::before is taken by the perforation
+       cutouts) so its grain rides on background-blend-mode instead.
+
+       countdown-card + blueprint-preview keep their bespoke premium
+       treatment defined upstream — this layer doesn't touch them.
+       ════════════════════════════════════════════════════════════ */
+
+    /* Isolation context — required for the ::before grain to z-stack
+       cleanly inside each card without leaking. */
+    .card,
+    .case,
+    .bonus-card,
+    .audience-card,
+    .tldr__item,
+    .credibility__stat,
+    .tz__row,
+    .faq__item,
+    .blueprint,
+    .blueprint__quad,
+    .stack,
+    .final-cta,
+    .credibility__photo,
+    .prof__photo {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    /* Shared grain — soft-light noise via ::before. The opacity is
+       overridden per-tier below so list items get less of it. */
+    /* Light-mode grain — multiply blend on white surfaces gives the
+       "ink absorbed by fiber" tactility without darkening the surface
+       perceptibly. Only tier 1 + tier 2 get grain; tier 3 stays clean. */
+    .card::before,
+    .case::before,
+    .bonus-card::before,
+    .audience-card::before,
+    .blueprint::before,
+    .stack::before,
+    .final-cta::before,
+    .credibility__photo::before,
+    .prof__photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--noise-on-light);
+      opacity: 0.3;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    /* Promote content above the grain pseudo */
+    .card > *,
+    .case > *,
+    .bonus-card > *,
+    .audience-card > *,
+    .tldr__item > *,
+    .credibility__stat > *,
+    .tz__row > *,
+    .faq__item > *,
+    .blueprint > *,
+    .blueprint__quad > *,
+    .stack > *,
+    .final-cta > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TIER 2 (content) ─────────────────────────────────────
+       Replace the flat oklch(0.16-0.17 / 70%) fills with a multi-
+       source gradient that has a subtle warm-corner highlight + a
+       gentle diagonal substrate. Inner bevel = top 1px white at 5%
+       (catches the light) + bottom 1px black at 30% (recedes). The
+       shadow stack mixes a close tight shadow with a mid ambient. */
+    /* Light-mode T2 — pure white card, hairline border ONLY. No box-
+       shadow. Supabase's defining move: cards live by their borders,
+       not by elevation. The whitespace between cards + the hairline
+       is enough separation; shadows would feel cheap by comparison. */
+    .card,
+    .case,
+    .audience-card {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      box-shadow: none;
+    }
+    /* bonus-card — the one T2 card with chromatic chrome: teal hairline
+       + barely-there teal tint. No shadow even here — the colored
+       border alone is the urgency signal. */
+    .bonus-card {
+      background:
+        radial-gradient(ellipse 90% 80% at 100% 0%, oklch(0.5 0.10 175 / 6%), transparent 65%),
+        var(--card);
+      border: 1px solid oklch(0.5 0.10 175 / 32%);
+      box-shadow: none;
+    }
+    /* Restore absolute positioning on the LIVE ONLY badge — the
+       `.bonus-card > *` rule above set it to `position: relative` for
+       z-stacking, which made the badge inline-flow into the row with
+       "/ Bonus 01". Re-declare absolute with z-index 2 so it sits
+       above both the grain pseudo AND its sibling content. */
+    .bonus-card__badge {
+      position: absolute;
+      z-index: 2;
+    }
+
+    /* ── TIER 3 (list) ────────────────────────────────────────
+       Cleaner surface, almost no grain (opacity 0.22), 1px inner top
+       highlight only (no bottom shadow — too much for a repeating
+       row). Soft drop shadow keeps the surface readable but not loud. */
+    /* Light-mode T3 — flat white, hairline border, ZERO shadow.
+       Reads as "list item" not "card". No grain on T3 (white stays
+       crisp). For the repeating FAQ/TLDR rhythm, shadows would
+       multiply visually — the hairline does all the work. */
+    .tldr__item,
+    .credibility__stat,
+    .tz__row,
+    .faq__item,
+    .blueprint__quad {
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      box-shadow: none;
+    }
+    /* faq__item[open] — branded teal hairline only. No glow. */
+    .faq__item[open] {
+      border-color: oklch(0.5 0.10 175 / 40%);
+      box-shadow: none;
+    }
+
+    /* ── TIER 1 (premium) ─────────────────────────────────────
+       Multi-source dramatic background (warm cream corner + cool teal
+       corner + diagonal substrate) — same recipe as the hero countdown
+       card so the value stack reads as "premium ticket-back surface".
+       Strong inner bevel + 5-layer shadow stack with a teal halo at
+       the far end (lifts the card off the page). */
+    /* Light-mode T1 — white card with a slightly stronger border
+       (oklch 0/16% vs the T2 14%). NO shadow. The difference from T2
+       is purely the border weight + the subtle teal corner tint at top.
+       Premium-by-restraint, not premium-by-elevation. */
+    .stack,
+    .blueprint,
+    .final-cta {
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 0%, oklch(0.5 0.10 175 / 6%), transparent 75%),
+        var(--card);
+      border: 1px solid oklch(0 0 0 / 16%);
+      box-shadow: none;
+    }
+    .stack::before,
+    .blueprint::before,
+    .final-cta::before {
+      opacity: 0.3;
+    }
+
+    /* ── TICKET — special: existing ::before/::after own the perforation
+       cutouts on left/right. We can't add a noise pseudo there, so we
+       ride the grain on a background-blend-mode stack instead. The
+       perforation cutouts continue to work because they're on top of
+       the background (separate pseudo layer). */
+    /* Light-mode ticket — cream paper substrate, ink-on-paper multiply
+       noise, hairline border. NO shadow. The perforation cutouts on
+       ::before/::after own the ticket-y feel; shadow would muddle it. */
+    .ticket {
+      position: relative;
+      isolation: isolate;
+      background:
+        var(--noise-on-light),
+        radial-gradient(ellipse 100% 80% at 50% 0%, oklch(0.97 0.012 80), transparent 80%),
+        linear-gradient(180deg, oklch(0.99 0.005 80), oklch(0.95 0.012 80));
+      background-blend-mode: multiply, normal, normal;
+      border: 1px solid oklch(0 0 0 / 16%);
+      box-shadow: none;
+    }
+
+    /* ── PHOTO PLACEHOLDERS ───────────────────────────────────
+       The "/ PHOTO ALEX" empty states get a richer multi-source
+       gradient so they don't read as flat dead rectangles. Grain
+       included for paper tactility. */
+    /* Photo placeholders — warm cream with subtle double teal hint.
+       Alex's actual photos fill both frames — but each section gets
+       its own portrait. credibility uses the podcast pose (alex.jpg)
+       that suggests "in conversation, transmitting"; prof uses the
+       studio shot on dark teal (alex-prof.jpg) that suggests "framed
+       portrait, identity". The shared rules (border, fallback gradient,
+       transparent placeholder color) live on both; only the background-
+       image diverges. */
+    .credibility__photo,
+    .prof__photo {
+      border: 1px solid oklch(0 0 0 / 16%);
+      color: transparent;
+      box-shadow: none;
+    }
+    .credibility__photo {
+      background:
+        url('alex.jpg') center 30% / cover no-repeat,
+        linear-gradient(165deg, oklch(0.96 0.012 80), oklch(0.93 0.015 80));
+    }
+    .prof__photo {
+      background:
+        url('alex-prof.jpg') center 25% / cover no-repeat,
+        linear-gradient(165deg, oklch(0.18 0.05 175), oklch(0.13 0.05 175));
+    }
+    /* Multiply-noise grain over the photo gives editorial print feel —
+       12% opacity registers as paper texture without darkening Alex. */
+    .credibility__photo::before,
+    .prof__photo::before {
+      opacity: 0.12;
+    }
+    /* Hide the "/ PHOTO ALEX" placeholder label on .prof__photo — the
+       actual photo now fills the frame. */
+    .prof__photo::after {
+      display: none;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       PAYMENT MODAL — intercepts every [data-payment-cta] click and
+       lets the visitor pick between Chariow (mobile money, Africa-
+       recommended) and Stripe (international card). Border-only,
+       Supabase-style. Centered on desktop, bottom-sheet on mobile.
+       ════════════════════════════════════════════════════════════ */
+    .payment-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+    }
+    .payment-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .payment-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: oklch(0.18 0 0 / 35%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .payment-modal__panel {
+      position: relative;
+      width: 100%;
+      max-width: 32rem;
+      background: var(--card);
+      border: 1px solid oklch(0 0 0 / 16%);
+      border-radius: var(--radius-2xl);
+      padding: 1.75rem;
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.25s ease-out;
+    }
+    .payment-modal.is-open .payment-modal__panel {
+      transform: translateY(0) scale(1);
+    }
+    @media (min-width: 640px) { .payment-modal__panel { padding: 2.25rem; } }
+    /* Mobile bottom-sheet feel — slides up from bottom, snaps to width */
+    @media (max-width: 639px) {
+      .payment-modal {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .payment-modal__panel {
+        border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        border-bottom: 0;
+        transform: translateY(100%);
+      }
+      .payment-modal.is-open .payment-modal__panel {
+        transform: translateY(0);
+      }
+    }
+
+    .payment-modal__head {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .payment-modal__title {
+      margin-top: 0.75rem;
+      font-size: clamp(1.5rem, 3vw, 1.9rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--foreground);
+      padding-right: 2rem;
+    }
+    .payment-modal__title em {
+      font-style: italic;
+      font-family: var(--font-serif);
+      color: var(--primary);
+      font-weight: 400;
+    }
+    .payment-modal__sub {
+      margin-top: 0.6rem;
+      color: var(--muted-foreground);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      padding-right: 2rem;
+    }
+    .payment-modal__close {
+      position: absolute;
+      top: -0.25rem;
+      right: -0.25rem;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      color: var(--muted-foreground);
+      background: var(--card);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .payment-modal__close:hover {
+      color: var(--foreground);
+      border-color: oklch(0 0 0 / 28%);
+      background: var(--muted);
+    }
+    .payment-modal__close svg { width: 16px; height: 16px; }
+
+    .payment-modal__options {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    /* Each option = wide horizontal card. Icon left, copy middle, arrow right.
+       Border-only chrome. Hover lifts border to teal. */
+    .payment-option {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1rem 1.1rem;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      color: var(--foreground);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s ease-out;
+    }
+    .payment-option:hover {
+      border-color: oklch(0.5 0.10 175 / 45%);
+      background: oklch(0.5 0.10 175 / 4%);
+      transform: translateY(-1px);
+    }
+    .payment-option:hover .payment-option__arrow {
+      transform: translateX(3px);
+      color: var(--primary);
+    }
+    .payment-option--recommended { border-color: oklch(0.5 0.10 175 / 35%); }
+
+    .payment-option__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .payment-option__icon img { display: block; }
+    /* Chariow — illustration sans bg propre, on lui donne un cadre
+       neutre cream + hairline pour qu'elle ne flotte pas. Logo réduit
+       à 34px dans la box 48px = ~28% de marge interne. */
+    .payment-option--chariow .payment-option__icon {
+      background: oklch(0.97 0.008 80);
+      border: 1px solid var(--border-strong);
+    }
+    .payment-option--chariow .payment-option__icon img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+    }
+    /* Stripe — le logo EST déjà un carré arrondi bleu identitaire,
+       on le laisse remplir tout le container 48px sans cadre supplémentaire. */
+    .payment-option--stripe .payment-option__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .payment-option__title {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--foreground);
+      letter-spacing: -0.01em;
+    }
+    .payment-option__badge {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      background: oklch(0.5 0.10 175 / 12%);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .payment-option__body {
+      margin-top: 0.2rem;
+      color: var(--muted-foreground);
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .payment-option__arrow {
+      width: 18px;
+      height: 18px;
+      color: var(--muted-foreground);
+      transition: transform 0.2s ease-out, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .payment-modal__foot {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border-strong);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      text-align: center;
+    }
+
+    /* Lock body scroll when modal is open */
+    body.is-modal-open { overflow: hidden; }
+
+    /* ── Selection highlight in brand teal ──────────────────── */
+    ::selection { background: oklch(0.5 0.10 175 / 22%); color: var(--foreground); }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="nav">
+  <!-- ════════════════════════════════════════════════════════════
+       SCROLL PROGRESS — fixed bar pinned at top
+       ════════════════════════════════════════════════════════════ -->
+  <div class="scroll-progress" aria-hidden="true"><div id="scrollBar"></div></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       NAV — sticky, transparent at top → blurred on scroll
+       ════════════════════════════════════════════════════════════ -->
+  <header class="nav" id="nav">
     <div class="container nav__inner">
-      <a href="#top" aria-label="VISIBLE"><img src="logo.svg" alt="VISIBLE" class="nav__logo-img" width="83" height="20" /></a>
-      <a href="#rejoindre" class="btn btn-primary btn-sm">Je rejoins la liste</a>
+      <a href="#top" class="nav__logo" aria-label="VISIBLE — Workshop live">
+        <img src="logo.svg" alt="VISIBLE" class="nav__logo-img" width="91" height="22" />
+      </a>
+      <div class="nav__meta" aria-hidden="true">
+        <span>SAM. 1 AOÛT</span> · <span>20H GMT</span> · <span>15 €</span>
+      </div>
+      <a href="#reserve" class="btn btn-primary btn-sm">
+        Réserver ma place
+        <svg class="icon-16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </header>
 
   <main id="top">
 
-    <!-- HERO -->
+    <!-- ════════════════════════════════════════════════════════════
+         1 — HERO
+         ════════════════════════════════════════════════════════════ -->
     <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="container hero__grid">
+      <div class="backdrop" aria-hidden="true"></div>
+      <div class="container">
 
-        <div class="reveal">
-          <p class="preheader"><span class="slash">/</span> VISIBLE arrive</p>
-          <h1 class="hero__core h-serif">Le talent ne paie pas. <em>La marque, si.</em></h1>
-          <p class="hero__sub-h">Rejoins la liste d'attente.</p>
-          <p class="hero__lead">Sois le premier informé, verrouille le <strong>prix fondateur</strong>, et reçois ton invitation au workshop VISIBLE.</p>
-          <div class="hero__trust" aria-hidden="true">
-            <span><span class="dot"></span> Gratuit</span>
-            <span><span class="dot"></span> Cadeau immédiat</span>
-            <span><span class="dot"></span> Zéro spam</span>
+        <div class="hero__inner">
+          <!-- LEFT COLUMN — copy + CTAs (à la Tom) -->
+          <div class="reveal">
+            <p class="preheader">
+              <span class="slash">/</span> WORKSHOP LIVE · SAM. 1 AOÛT 2026 · 20H GMT · 90 MIN
+            </p>
+
+            <h1 class="hero__title">
+              <img src="logo.svg" alt="VISIBLE" class="hero__title-img" />
+            </h1>
+
+            <p class="hero__baseline">De designer invisible à <em>designer demandé.</em></p>
+
+            <p class="hero__sub">
+              En 90 minutes en direct avec Alex, transforme ton talent de designer en
+              <em>une marque qui attire des clients premium (1&nbsp;000€+)</em>,
+              sans démarcher.
+            </p>
+
+            <div class="hero__ctas">
+              <a href="#reserve" class="btn btn-primary btn-lg" data-payment-cta>
+                Je réserve ma place — 15 €
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <p class="hero__microcopy">
+              <span>/</span> 90 MIN · EN DIRECT · REPLAY INCLUS · PLACE CRÉDITÉE SUR L'ABONNEMENT VISIBLE
+            </p>
           </div>
-        </div>
 
-        <!-- FORM -->
-        <div class="reveal form-card" id="rejoindre" style="transition-delay: 100ms">
-          <p class="form-card__label">/ Liste d'attente · gratuit</p>
-          <h2 class="form-card__title">Réserve ta place dans la file.<small>Prénom + email, c'est tout.</small></h2>
+          <!-- RIGHT COLUMN — filled brand-teal countdown card + cream blueprint preview -->
+          <div class="reveal hero__right" style="transition-delay: 120ms">
 
-          <form id="waitlistForm" novalidate>
-            <label class="field">
-              <span>Prénom</span>
-              <input type="text" name="prenom" autocomplete="given-name" placeholder="Alex" required />
-            </label>
-            <label class="field">
-              <span>Email</span>
-              <input type="email" name="email" autocomplete="email" placeholder="toi@email.com" required />
-            </label>
-            <!-- honeypot anti-spam : laissé vide par les humains -->
-            <input type="text" name="_company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <button type="submit" class="btn btn-primary btn-lg">
-              Je rejoins la liste
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </button>
-          </form>
-          <p class="form-card__micro">Gratuit · zéro spam · ton cadeau arrive dans la foulée.</p>
+            <div class="countdown-card">
+              <div class="countdown-card__head">
+                <span class="countdown-card__head-left">
+                  <span class="countdown-card__dot" aria-hidden="true"></span>
+                  L'ATELIER COMMENCE DANS
+                </span>
+                <span class="countdown-card__head-right">GMT</span>
+              </div>
 
-          <!-- success state (révélé après envoi) -->
-          <div class="form-success" id="waitlistSuccess" hidden>
-            <div class="form-success__icon" aria-hidden="true">🎉</div>
-            <h3>Tu es sur la liste.</h3>
-            <p>Surveille ta boîte mail : ton cadeau arrive, et tu seras le premier prévenu pour le workshop.</p>
+              <h2 class="countdown-card__date">
+                Samedi <em>1 août</em> 2026
+              </h2>
+              <p class="countdown-card__date-sub">
+                20h00 Afrique de l'Ouest · 90 minutes live
+                <span aria-hidden="true">·</span>
+                <span id="countdown-days-inline">··</span> jours
+              </p>
+
+              <div class="countdown" id="countdown" aria-live="polite">
+                <div class="countdown__unit">
+                  <div class="countdown__value" id="cd-days">00</div>
+                  <div class="countdown__label">Jours</div>
+                </div>
+                <div class="countdown__unit">
+                  <div class="countdown__value" id="cd-hours">00</div>
+                  <div class="countdown__label">Heures</div>
+                </div>
+                <div class="countdown__unit">
+                  <div class="countdown__value" id="cd-mins">00</div>
+                  <div class="countdown__label">Min</div>
+                </div>
+                <div class="countdown__unit">
+                  <div class="countdown__value" id="cd-secs">00</div>
+                  <div class="countdown__label">Sec</div>
+                </div>
+              </div>
+
+              <div class="countdown-card__seat">
+                <div>
+                  <div class="countdown-card__seat-label">Ta place</div>
+                  <div class="countdown-card__seat-price">15 € <em>unique</em></div>
+                </div>
+                <a href="#" class="btn btn-cream btn-sm" data-payment-cta>
+                  Réserver
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <a href="#blueprint" class="blueprint-preview">
+              <div class="blueprint-preview__thumb" aria-hidden="true"></div>
+              <div>
+                <p class="blueprint-preview__label">TON BRAND BLUEPRINT</p>
+                <h3 class="blueprint-preview__title">Tu le construis avec Alex, en direct.</h3>
+                <p class="blueprint-preview__body">
+                  Une page complète — positionnement, marque, contenu — finie à la fin des 90 min.
+                </p>
+              </div>
+            </a>
+
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 3 CHOSES QUE TU OBTIENS -->
+    <!-- ════════════════════════════════════════════════════════════
+         2 — WHY LISTEN TO ME (credibility stats + photo)
+         ════════════════════════════════════════════════════════════ -->
     <section class="section section--alt">
       <div class="container">
-        <div class="section__head reveal">
-          <p class="preheader"><span class="slash">/</span> Ce que tu obtiens</p>
-          <h2 class="section__title h-serif">3 raisons d'être <em>sur la liste.</em></h2>
-        </div>
+        <div class="credibility">
+          <div class="reveal">
+            <p class="preheader"><span class="slash">/</span> Pourquoi m'écouter</p>
+            <h2 class="credibility__title">
+              Je ne théorise pas.<br />
+              <em>J'ai déjà fait le chemin.</em>
+            </h2>
+            <p class="credibility__lead">
+              Designer, fondateur de LogoMint, créateur de VISIBLE. J'ai construit le studio
+              qui décroche les marques que les autres designers n'osent même pas démarcher —
+              sans agence, sans DM à froid, sans Malt.
+            </p>
 
-        <div class="benefits">
-          <div class="benefit reveal">
-            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8 8 11 4.5-3 8-6 8-11V5l-8-3z"/></svg></div>
-            <div class="benefit__num">/ 01</div>
-            <h3>Accès &amp; prix fondateur</h3>
-            <p>Quand VISIBLE ouvre, tu passes <strong>en premier</strong> — avec le <strong>prix fondateur verrouillé</strong>, le plus bas que le programme aura jamais.</p>
+            <div class="credibility__stats">
+              <div class="credibility__stat">
+                <div class="credibility__stat-num">500<em>+</em></div>
+                <div class="credibility__stat-label">Marques accompagnées</div>
+              </div>
+              <div class="credibility__stat">
+                <div class="credibility__stat-num">8<em>+</em></div>
+                <div class="credibility__stat-label">Ans de design</div>
+              </div>
+              <div class="credibility__stat">
+                <div class="credibility__stat-num">LogoMint</div>
+                <div class="credibility__stat-label">Studio fondateur</div>
+              </div>
+              <div class="credibility__stat">
+                <div class="credibility__stat-num">100<em>%</em></div>
+                <div class="credibility__stat-label">Clients entrants</div>
+              </div>
+            </div>
           </div>
 
-          <div class="benefit reveal" style="transition-delay: 80ms">
-            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9"/><path d="M2 7h20v5H2z"/><path d="M12 21V7"/><path d="M12 7S10 2 7 2a2.5 2.5 0 0 0 0 5h5zM12 7s2-5 5-5a2.5 2.5 0 0 1 0 5h-5z"/></svg></div>
-            <div class="benefit__num">/ 02</div>
-            <h3>Un cadeau immédiat</h3>
-            <p>Ton <strong>mini Brand Blueprint</strong> : un avant-goût du livrable du workshop, à remplir aujourd'hui. <em>(Ou le calculateur de tarifs.)</em></p>
-          </div>
-
-          <div class="benefit reveal" style="transition-delay: 160ms">
-            <div class="benefit__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></div>
-            <div class="benefit__num">/ 03</div>
-            <h3>Invitation prioritaire</h3>
-            <p>L'invitation au <strong>prochain workshop</strong> avant tout le monde — et une <strong>place à tarif réduit</strong>.</p>
-          </div>
+          <div class="reveal credibility__photo" style="transition-delay: 120ms" role="img" aria-label="Photo d'Alex Landrin"></div>
         </div>
       </div>
     </section>
 
-    <!-- LE CADEAU IMMÉDIAT (visuel) -->
+    <!-- ════════════════════════════════════════════════════════════
+         4 — PROBLEM
+         ════════════════════════════════════════════════════════════ -->
     <section class="section">
-      <div class="container gift">
-        <div class="gift__copy reveal">
-          <p class="preheader"><span class="slash">/</span> Ton cadeau</p>
-          <h2 class="h-serif">Le mini <em>Brand Blueprint.</em></h2>
-          <p>Un aperçu du plan que les participants construisent en direct au workshop : ton positionnement en une phrase, tes 3 mots de marque, ton premier pilier de contenu. <strong style="color:var(--foreground);font-weight:500">Tu commences à devenir visible avant même le live.</strong></p>
-          <p class="gift__alt">Tu reçois le lien par email, juste après ton inscription.</p>
-        </div>
-
-        <div class="reveal mini" style="transition-delay: 100ms" role="img" aria-label="Aperçu du mini Brand Blueprint">
-          <div class="mini__head"><span><strong>VISIBLE</strong> · MINI BRAND BLUEPRINT</span><span>1 PAGE</span></div>
-          <div class="mini__row">
-            <div class="mini__k">Mon positionnement</div>
-            <div class="mini__v">J'aide <span class="blank">_______</span> à <span class="blank">_______</span> grâce à <span class="blank">_______</span>.</div>
-          </div>
-          <div class="mini__row">
-            <div class="mini__k">Mes 3 mots de marque</div>
-            <div class="mini__v"><span class="blank">______</span> · <span class="blank">______</span> · <span class="blank">______</span></div>
-          </div>
-          <div class="mini__row">
-            <div class="mini__k">Mon 1ᵉʳ contenu-aimant</div>
-            <div class="mini__v"><span class="blank">________________________</span></div>
-          </div>
+      <div class="container">
+        <div class="problem reveal">
+          <p class="preheader"><span class="slash">/</span> Le constat</p>
+          <h2 class="problem__title">
+            Tu es un excellent designer.<br />
+            Mais <em>personne ne le sait</em>.
+          </h2>
+          <p class="problem__body">
+            Tu livres du super travail. Pourtant tu cours encore après les clients, tu te bats sur les prix
+            sur Malt ou en DM, et tu vois des designers deux fois moins bons que toi décrocher de meilleurs contrats.
+            <br /><br />
+            Le problème n'est pas ton talent. C'est que tu es invisible — et l'invisibilité, ça te garde fauché.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- À QUI C'EST DESTINÉ + TRANSPARENCE -->
+    <!-- ════════════════════════════════════════════════════════════
+         5 — TL;DR
+         ════════════════════════════════════════════════════════════ -->
     <section class="section section--alt">
-      <div class="container audience reveal">
-        <p class="preheader" style="justify-content:center"><span class="slash">/</span> Pour qui</p>
-        <h2 class="h-serif">Pour les créatifs francophones <em>doués mais invisibles.</em></h2>
-        <p>Designers, monteurs, devs, consultants… talentueux, mais que personne ne connaît encore.</p>
-        <p class="note"><strong>VISIBLE est un programme premium et payant.</strong> La liste d'attente, elle, est gratuite — et te verrouille le prix fondateur. On joue franc-jeu : elle est faite pour celles et ceux qui veulent vraiment passer de l'ombre à la lumière.</p>
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> TL;DR · TOUT EN 10 SECONDES</p>
+          <h2 class="section__title">L'essentiel, vite.</h2>
+        </div>
+
+        <div class="tldr">
+          <div class="tldr__item reveal">
+            <div class="tldr__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>
+            </div>
+            <p class="tldr__text"><strong>15 €</strong> une fois — et c'est <strong>crédité sur ton premier mois VISIBLE</strong> si tu rejoins ensuite.</p>
+          </div>
+
+          <div class="tldr__item reveal" style="transition-delay: 60ms">
+            <div class="tldr__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <p class="tldr__text"><strong>90 min en direct</strong> le samedi 1 août, 20h GMT. Pas dispo ? <strong>Replay inclus</strong>.</p>
+          </div>
+
+          <div class="tldr__item reveal" style="transition-delay: 120ms">
+            <div class="tldr__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+            </div>
+            <p class="tldr__text">Pour les <strong>designers (et créatifs) talentueux mais invisibles</strong>. Débutant ou en activité.</p>
+          </div>
+
+          <div class="tldr__item reveal" style="transition-delay: 180ms">
+            <div class="tldr__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <p class="tldr__text">Tu repars avec <strong>Ton Brand Blueprint</strong>, une page construite en live — pas juste des notes.</p>
+          </div>
+
+          <div class="tldr__item reveal" style="transition-delay: 240ms">
+            <div class="tldr__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <p class="tldr__text">Les <strong>présents en direct</strong> reçoivent des <strong>bonus exclusifs</strong>.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section class="section final">
-      <div class="container reveal">
-        <p class="preheader" style="justify-content:center"><span class="slash">/</span> Dernière chose</p>
-        <h2 class="h-serif">Ta marque commence <em>aujourd'hui.</em></h2>
-        <p>Rejoins la liste — gratuit, et ton cadeau t'attend.</p>
-        <a href="#rejoindre" class="btn btn-primary btn-lg">
-          Je rejoins la liste
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
+    <!-- ════════════════════════════════════════════════════════════
+         6 — WHAT WE'LL BUILD (3 BLOCKS)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section" id="what">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Ce qu'on va construire ensemble</p>
+          <h2 class="section__title">3 blocs, finis pendant l'appel.</h2>
+          <p class="section__lead">
+            Pas un cours qu'on écoute. Trois sprints concrets —
+            <strong style="color:var(--foreground);font-weight:500">chaque bloc remplit une partie de ton Brand Blueprint</strong>.
+          </p>
+        </div>
+
+        <div class="blocks">
+          <div class="card reveal">
+            <div class="block__num">/ Bloc 01 · remplit la zone 1 du Blueprint</div>
+            <div class="block__time">≈ 25 min</div>
+            <h3 class="block__title">Ton positionnement + ton client de rêve.</h3>
+            <div class="block__separator"></div>
+            <p class="block__body">
+              Ta phrase « <strong style="color:var(--foreground);font-weight:500">J'aide … à … grâce à …</strong> » —
+              celle qui te rend impossible à confondre. Plus le portrait précis de ton client de rêve :
+              qui il est, ce qu'il veut, où il traîne.
+            </p>
+          </div>
+
+          <div class="card reveal" style="transition-delay: 100ms">
+            <div class="block__num">/ Bloc 02 · remplit la zone 2 du Blueprint</div>
+            <div class="block__time">≈ 30 min</div>
+            <h3 class="block__title">Ta marque visible + audit de ton profil.</h3>
+            <div class="block__separator"></div>
+            <p class="block__body">
+              Tes <strong style="color:var(--foreground);font-weight:500">3 mots de marque</strong> et ta direction visuelle.
+              Plus l'audit express de ton profil actuel — <strong style="color:var(--foreground);font-weight:500">note /10 + 3 corrections</strong> à appliquer cette semaine.
+            </p>
+          </div>
+
+          <div class="card reveal" style="transition-delay: 200ms">
+            <div class="block__num">/ Bloc 03 · remplit la zone 3 du Blueprint</div>
+            <div class="block__time">≈ 35 min</div>
+            <h3 class="block__title">Ton système d'attraction.</h3>
+            <div class="block__separator"></div>
+            <p class="block__body">
+              Tes <strong style="color:var(--foreground);font-weight:500">3 piliers de contenu</strong> — les angles qui font venir les clients à toi, sans démarcher.
+              Plus le brief de ton premier <strong style="color:var(--foreground);font-weight:500">contenu-aimant</strong> à publier dans les 7 jours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         6.5 — TON BRAND BLUEPRINT (deliverable showcase)
+         The one-page document everyone walks away with. Sits between
+         the "what we'll do" blocks and the value stack so the reader
+         sees the artifact BEFORE seeing the price.
+         ════════════════════════════════════════════════════════════ -->
+    <section id="blueprint" class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Ce que tu repars avec</p>
+          <h2 class="section__title">Tu ne repars pas avec des notes. <em style="color:var(--primary)">Tu repars avec un plan.</em></h2>
+          <p class="section__lead">
+            <strong style="color:var(--foreground);font-weight:500">Ton Brand Blueprint</strong> :
+            le plan complet de ta marque-aimant, sur une seule page,
+            construit avec toi en direct pendant les 90 min.
+          </p>
+        </div>
+
+        <div class="reveal blueprint">
+          <div class="blueprint__head">
+            <span class="blueprint__brand"><strong>VISIBLE</strong> · TON BRAND BLUEPRINT</span>
+            <span class="blueprint__id">N° 0001 / [TON NOM]</span>
+          </div>
+
+          <div class="blueprint__grid">
+            <div class="blueprint__quad">
+              <span class="blueprint__quad-num">/ ZONE 01</span>
+              <h3 class="blueprint__quad-title">Mon positionnement</h3>
+              <p class="blueprint__quad-line">La phrase « J'aide … à … grâce à … ».</p>
+              <p class="blueprint__quad-sub">+ Le client de rêve</p>
+            </div>
+            <div class="blueprint__quad">
+              <span class="blueprint__quad-num">/ ZONE 02</span>
+              <h3 class="blueprint__quad-title">Ma direction de marque visible</h3>
+              <p class="blueprint__quad-line">3 mots de marque + direction visuelle.</p>
+              <p class="blueprint__quad-sub">+ Audit /10 du profil + 3 corrections</p>
+            </div>
+            <div class="blueprint__quad">
+              <span class="blueprint__quad-num">/ ZONE 03</span>
+              <h3 class="blueprint__quad-title">Mon système d'attraction</h3>
+              <p class="blueprint__quad-line">3 piliers de contenu.</p>
+              <p class="blueprint__quad-sub">+ Premier contenu-aimant</p>
+            </div>
+            <div class="blueprint__quad">
+              <span class="blueprint__quad-num">/ ZONE 04</span>
+              <h3 class="blueprint__quad-title">Mon prochain pas</h3>
+              <p class="blueprint__quad-line">La 1<sup>re</sup> action concrète sous 48h.</p>
+              <p class="blueprint__quad-sub">+ Ton point de départ</p>
+            </div>
+          </div>
+
+          <div class="blueprint__foot">
+            <span class="blueprint__foot-label">/ FORMAT</span>
+            <span class="blueprint__foot-value">PDF · 1 PAGE · IMPRIMABLE · À VIE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         7 — VALUE STACK + CTA
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section section--alt" id="reserve">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Ce qui est inclus</p>
+          <h2 class="section__title">6 choses dans ton billet. <em style="color:var(--primary)">84 000 FCFA de valeur.</em></h2>
+          <p class="section__lead">
+            Et c'est crédité sur ton premier mois si tu rejoins l'abonnement VISIBLE après le workshop.
+          </p>
+        </div>
+
+        <div class="stack reveal">
+          <div class="stack__row">
+            <span class="stack__label">01 · Atelier live · 90 min avec Alex</span>
+            <span class="stack__value">29 000 FCFA</span>
+          </div>
+          <div class="stack__row stack__row--star">
+            <span class="stack__label">02 · Ton Brand Blueprint — template designé, rempli en direct</span>
+            <span class="stack__value">19 000 FCFA</span>
+          </div>
+          <div class="stack__row">
+            <span class="stack__label">03 · Worksheet « Ma marque visible »</span>
+            <span class="stack__value">9 000 FCFA</span>
+          </div>
+          <div class="stack__row">
+            <span class="stack__label">04 · Replay à vie · accès illimité</span>
+            <span class="stack__value">15 000 FCFA</span>
+          </div>
+          <div class="stack__row stack__row--bonus">
+            <span class="stack__label">05 · Audit en direct de ton positionnement</span>
+            <span class="stack__value">exclusif</span>
+          </div>
+          <div class="stack__row stack__row--bonus">
+            <span class="stack__label">06 · Pack templates marque perso</span>
+            <span class="stack__value">12 000 FCFA</span>
+          </div>
+
+          <div class="stack__total">
+            <span class="stack__total-label">Valeur totale</span>
+            <span class="stack__total-strike">≈ 84 000 FCFA</span>
+          </div>
+
+          <div class="stack__price">
+            <div class="stack__price-label">/ Aujourd'hui</div>
+            <div class="stack__price-big tabular">15<sup>€</sup></div>
+            <div class="stack__price-fcfa">≈ 9 800 FCFA · paiement unique · mobile money</div>
+            <a href="#" class="btn btn-primary btn-lg stack__cta" data-payment-cta>
+              Je réserve ma place — 15 €
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         7.5 — LIVE-ONLY BONUSES (brief 5.8)
+         Reinforces the urgency hook the value stack already mentions.
+         Two cards, glowing border, "LIVE ONLY" badge top-right.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Réservé aux présents en direct</p>
+          <h2 class="section__title">Deux bonus qui <em style="color:var(--primary)">ne reviennent jamais.</em></h2>
+          <p class="section__lead">
+            Le replay couvre tout le workshop. Mais ces deux bonus, eux,
+            ferment au démarrage du live — et n'apparaissent dans aucun replay.
+          </p>
+        </div>
+
+        <div class="bonuses">
+          <div class="bonus-card reveal">
+            <span class="bonus-card__badge">En direct</span>
+            <span class="bonus-card__num">/ Bonus 01</span>
+            <h3 class="bonus-card__title">Audit en direct de ton positionnement.</h3>
+            <p class="bonus-card__body">
+              Alex revoit ta phrase « J'aide … à … » en live devant tout le monde.
+              Repartis avec une formulation validée — pas une hypothèse.
+            </p>
+          </div>
+
+          <div class="bonus-card reveal" style="transition-delay: 120ms">
+            <span class="bonus-card__badge">En direct</span>
+            <span class="bonus-card__num">/ Bonus 02</span>
+            <h3 class="bonus-card__title">Q&amp;A étendu, sans limite de temps.</h3>
+            <p class="bonus-card__body">
+              On reste après les 90 min jusqu'à épuisement des questions.
+              Tu poses la tienne ; Alex y répond avec son écran et ton cas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         8 — SOCIAL PROOF — LogoMint portfolio (real work, no invented
+             testimonials — brief §5.9 "ne rien inventer")
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> La preuve</p>
+          <h2 class="section__title">Les témoignages arrivent. <em style="color:var(--primary)">La preuve est déjà là.</em></h2>
+          <p class="section__lead">
+            VISIBLE, c'est le système exact qui a bâti <strong style="color:var(--foreground);font-weight:500">LogoMint</strong>.
+            Tu rejoins la toute première promo — les premiers témoignages, c'est vous qui allez les écrire.
+            En attendant, regarde le travail.
+          </p>
+        </div>
+
+        <!-- Infinite logo marquee — réalisations LogoMint (logos/*.svg).
+             Les DEUX groupes sont IDENTIQUES : le 2e (aria-hidden) assure la
+             boucle sans couture. Pour ajouter/retirer un logo, modifier les
+             DEUX groupes à l'identique. -->
+        <div class="marquee reveal" aria-label="Logos des réalisations LogoMint">
+          <div class="marquee__track">
+            <div class="marquee__group">
+              <img class="marquee__logo" src="logos/Anchors.svg" alt="prospera" loading="lazy" />
+              <img class="marquee__logo" src="logos/Group.svg" alt="ZilkCredible" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-3.svg" alt="Haystin Marine Energy" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-1.svg" alt="Outsity" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-7.svg" alt="post.r" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_2.svg" alt="Nuvable" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-10.svg" alt="talentIQ" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-5.svg" alt="rippleedge" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-4.svg" alt="Factor Investment" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-2.svg" alt="syja" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-11.svg" alt="BlinkPay" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-6.svg" alt="Belovee" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1.svg" alt="Aetheris" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-8.svg" alt="kelya" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-12.svg" alt="cultiva" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-9.svg" alt="KICKNOVA" loading="lazy" />
+            </div>
+            <div class="marquee__group" aria-hidden="true">
+              <img class="marquee__logo" src="logos/Anchors.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Group.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-3.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-1.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-7.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_2.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-10.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-5.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-4.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-2.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-11.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-6.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-8.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-12.svg" alt="" loading="lazy" />
+              <img class="marquee__logo" src="logos/Layer_1-9.svg" alt="" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio__foot reveal">
+          <a href="https://logomint.co/fr" target="_blank" rel="noopener" class="portfolio__link">
+            Voir tout le portfolio LogoMint
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         8.5 — POUR TOI / PAS POUR TOI (brief 5.10)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> On joue franc-jeu</p>
+          <h2 class="section__title">Pour toi. <em style="color:var(--primary)">Ou pas du tout.</em></h2>
+        </div>
+
+        <div class="audience-grid">
+          <div class="audience-card audience-card--yes reveal">
+            <div class="audience-card__head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              <h3>Pour toi si</h3>
+            </div>
+            <ul>
+              <li>Tu es bon dans ton métier mais personne ne le sait encore.</li>
+              <li>Tu veux des clients premium sans devoir démarcher.</li>
+              <li>Tu es prêt à passer à l'action — pas juste à écouter.</li>
+              <li>Tu vends un service (design, dev, montage, conseil…).</li>
+            </ul>
+          </div>
+
+          <div class="audience-card audience-card--no reveal" style="transition-delay: 120ms">
+            <div class="audience-card__head">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <h3>Pas pour toi si</h3>
+            </div>
+            <ul>
+              <li>Tu cherches une recette magique « 10K€/mois sans rien faire ».</li>
+              <li>Tu ne vends aucun service ni produit créatif.</li>
+              <li>Tu refuses d'agir tant que tout n'est pas « parfait ».</li>
+              <li>Tu attends qu'on te livre du clé-en-main sans participer.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         9 — TICKET
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Ton billet</p>
+          <h2 class="section__title">Workshop N°01.</h2>
+        </div>
+
+        <div class="ticket-wrap reveal">
+          <div class="ticket">
+            <div class="ticket__head">
+              <span class="ticket__brand"><strong>VISIBLE</strong> · WORKSHOP</span>
+              <span class="ticket__number">N°01 · 2026</span>
+            </div>
+
+            <div class="ticket__body">
+              <h3 class="ticket__title">
+                <img src="logo.svg" alt="VISIBLE" class="ticket__title-img" />
+              </h3>
+              <div class="ticket__meta">
+                <div class="ticket__meta-row">
+                  <span>Date</span>
+                  <span>SAM. 1 AOÛT 2026</span>
+                </div>
+                <div class="ticket__meta-row">
+                  <span>Heure</span>
+                  <span>20H00 GMT</span>
+                </div>
+                <div class="ticket__meta-row">
+                  <span>Durée</span>
+                  <span>90 MIN + Q&amp;A</span>
+                </div>
+                <div class="ticket__meta-row">
+                  <span>Format</span>
+                  <span>LIVE + REPLAY</span>
+                </div>
+                <div class="ticket__meta-row">
+                  <span>Admis</span>
+                  <span>1 · TOI</span>
+                </div>
+                <div class="ticket__meta-row ticket__price-row">
+                  <span>Tarif</span>
+                  <span>15 €</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ticket__included">
+              <p class="ticket__included-head">/ Inclus dans ton billet</p>
+              <ul>
+                <li>Atelier live 90 min</li>
+                <li>Worksheet en direct</li>
+                <li>Replay à vie</li>
+                <li>Pack templates</li>
+                <li>Bonus en direct</li>
+                <li>Crédit 15€ sur abonnement VISIBLE</li>
+              </ul>
+            </div>
+
+            <div class="ticket__barcode">
+              <div class="ticket__barcode-bars" id="barcode" aria-hidden="true"></div>
+              <span class="ticket__barcode-id">ACAD · WS01 · 20260801</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         10 — TIMEZONE LOCATOR
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Heure locale</p>
+          <h2 class="section__title">Où que tu sois, voilà ton créneau.</h2>
+        </div>
+
+        <div class="tz reveal">
+          <div class="tz__local" id="tz-local" hidden>
+            <span class="tz__local-label">/ Chez toi (<span id="tz-name">détection…</span>)</span>
+            <span class="tz__local-value" id="tz-value">—</span>
+          </div>
+
+          <div class="tz__list">
+            <div class="tz__row">
+              <span class="tz__city">Dakar · Abidjan · Bamako<small>GMT</small></span>
+              <span class="tz__time">20:00</span>
+            </div>
+            <div class="tz__row">
+              <span class="tz__city">Douala · Yaoundé · Kinshasa<small>UTC+1</small></span>
+              <span class="tz__time">21:00</span>
+            </div>
+            <div class="tz__row">
+              <span class="tz__city">Paris · Bruxelles · Genève<small>CEST · UTC+2</small></span>
+              <span class="tz__time">22:00</span>
+            </div>
+            <div class="tz__row">
+              <span class="tz__city">Montréal · New York<small>EDT · UTC−4</small></span>
+              <span class="tz__time">16:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         11 — MEET YOUR TEACHER (story-focused bio)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> Ton prof</p>
+        </div>
+
+        <div class="prof reveal">
+          <div class="prof__photo" aria-label="Photo d'Alex Landrin"></div>
+          <div>
+            <h2 class="prof__title">Alex Landrin.</h2>
+            <p class="prof__sub">Designer · Fondateur de LogoMint</p>
+            <p class="prof__bio">
+              Il y a quelques années, je galérais comme la plupart des designers africains :
+              du super travail, zéro client premium. J'avais le talent — pas la visibilité.
+              <br /><br />
+              Le déclic est venu en arrêtant de me vendre comme « designer freelance »
+              et en construisant <strong style="color:var(--foreground);font-weight:500">LogoMint</strong>
+              en mettant mon <em>personal branding</em> en avant —
+              le studio qui attire désormais les marques au lieu de les chasser.
+              <br /><br />
+              Avec <strong style="color:var(--foreground);font-weight:500">VISIBLE</strong>,
+              je transmets le système exact que j'ai utilisé. Aucune théorie. Que du terrain.
+            </p>
+            <div class="prof__chips">
+              <span class="prof__chip">Samedi · 20h GMT</span>
+              <span class="prof__chip">LogoMint · VISIBLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         12 — FAQ — objection-removal block. Featured "Qu'est-ce que je
+         repars avec ?" is open by default to highlight the Brand Blueprint.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> FAQ</p>
+          <h2 class="section__title">Les questions que tu te poses.</h2>
+        </div>
+
+        <div class="faq">
+          <details class="faq__item reveal" open>
+            <summary class="faq__q">Et si je ne peux pas être là en direct ?</summary>
+            <div class="faq__a">
+              Le <strong>replay est inclus à vie</strong>, accessible dès la fin du workshop.
+              Tu pourras tout regarder à ton rythme. Petite contrepartie honnête : les
+              <strong>bonus en direct</strong> (audit live + Q&A étendu) restent, eux, réservés aux présents.
+            </div>
+          </details>
+
+          <details class="faq__item reveal" style="transition-delay: 60ms">
+            <summary class="faq__q">C'est pour moi si je débute ? Ou si je suis déjà avancé ?</summary>
+            <div class="faq__a">
+              <strong>Oui dans les deux cas.</strong> Tant que tu sais créer (design, dev, montage, conseil…),
+              on travaille ta visibilité. Les débutants partent avec une base claire,
+              les expérimentés reconstruisent leur positionnement.
+            </div>
+          </details>
+
+          <details class="faq__item reveal" style="transition-delay: 120ms">
+            <summary class="faq__q">Comment je paie ?</summary>
+            <div class="faq__a">
+              <strong>Mobile money</strong> : Wave, Orange Money, MTN MoMo, Moov. <strong>Carte bancaire</strong> aussi.
+              Paiement sécurisé via Chariow. Juste après, tu es redirigé vers le <strong>groupe WhatsApp</strong> du
+              workshop — avec ton accès et le worksheet à remplir en direct.
+            </div>
+          </details>
+
+          <details class="faq__item reveal" style="transition-delay: 180ms">
+            <summary class="faq__q">Les 15 € sont vraiment crédités ?</summary>
+            <div class="faq__a">
+              <strong>Oui, sans condition.</strong> Si tu rejoins l'abonnement <strong>VISIBLE</strong> (50 000 FCFA/mois)
+              après le workshop, les 15 € sont automatiquement déduits de ton premier mois.
+              Aucune obligation de rejoindre.
+            </div>
+          </details>
+
+          <details class="faq__item reveal" style="transition-delay: 240ms">
+            <summary class="faq__q">Qu'est-ce que je repars avec ?</summary>
+            <div class="faq__a">
+              <strong>Ton Brand Blueprint</strong> : le plan complet de ta marque sur une seule page,
+              designé et rempli en direct pendant les 90 minutes. Un PDF imprimable, à vie,
+              avec tes 4 zones complétées — positionnement, direction visuelle, 3 piliers, prochain pas.
+            </div>
+          </details>
+
+          <details class="faq__item reveal" style="transition-delay: 300ms">
+            <summary class="faq__q">J'ai besoin de quoi ?</summary>
+            <div class="faq__a">
+              Un <strong>téléphone ou un ordi</strong>, une connexion correcte, et de quoi
+              remplir ton Brand Blueprint (on te fournit le template juste avant le live).
+              Prévois un coin tranquille pendant 90 min — tu en sortiras avec ta page finie.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
+         13 — FINAL CTA + countdown mirror (brief 5.15)
+         Closing reminder: promise + countdown + CTA + scarcity note.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="final-cta-wrap">
+      <div class="backdrop" aria-hidden="true"></div>
+      <div class="container">
+        <div class="final-cta reveal">
+          <p class="preheader"><span class="slash">/</span> Dernière chose</p>
+          <h2>De designer invisible<br />à <em>designer demandé.</em></h2>
+          <p class="final-cta__sub">
+            Le 1 août à 20h00 GMT, Alex démarre. Tu repars 90 min plus tard avec
+            <strong style="color:var(--foreground);font-weight:500">Ton Brand Blueprint</strong> fini dans la main.
+          </p>
+
+          <div class="final-cta__countdown">
+            <div class="countdown" aria-live="polite">
+              <div class="countdown__unit">
+                <div class="countdown__value" id="cd-days-2">00</div>
+                <div class="countdown__label">Jours</div>
+              </div>
+              <div class="countdown__unit">
+                <div class="countdown__value" id="cd-hours-2">00</div>
+                <div class="countdown__label">Heures</div>
+              </div>
+              <div class="countdown__unit">
+                <div class="countdown__value" id="cd-mins-2">00</div>
+                <div class="countdown__label">Min</div>
+              </div>
+              <div class="countdown__unit">
+                <div class="countdown__value" id="cd-secs-2">00</div>
+                <div class="countdown__label">Sec</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="final-cta__ctas">
+            <a href="#" class="btn btn-primary btn-lg" data-payment-cta>
+              Je réserve ma place — 15 €
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#what" class="btn btn-outline btn-lg">Revoir le programme</a>
+          </div>
+
+          <p class="final-cta__warning">
+            ⚠ Bonus en direct &amp; tarif ferment au démarrage
+          </p>
+        </div>
       </div>
     </section>
 
   </main>
 
+  <div class="mobile-spacer" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="container footer__inner">
-      <p class="footer__brand">/ <strong>VISIBLE</strong> © 2026 · UN PROGRAMME PAR ALEX</p>
+      <p class="footer__brand">/ <strong style="color:var(--foreground);font-weight:500">VISIBLE</strong> © 2026 · UN WORKSHOP PAR ALEX</p>
       <nav class="footer__nav">
-        <a href="/workshop">Le workshop</a>
         <a href="https://logomint.co/fr" target="_blank" rel="noopener">LogoMint</a>
         <a href="mailto:hello@visible.fr">Contact</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
       </nav>
     </div>
   </footer>
 
-  <script>
-    /* ════════════════════════════════════════════════════════════
-       Le formulaire poste en JSON vers /api/waitlist (fonction Vercel)
-       qui ajoute le contact à l'audience Resend côté serveur (la clé
-       API n'est jamais exposée au navigateur). Voir api/waitlist.js.
-       ════════════════════════════════════════════════════════════ */
-    const form = document.getElementById("waitlistForm");
-    const success = document.getElementById("waitlistSuccess");
-    const micro = document.querySelector(".form-card__micro");
+  <!-- ════════════════════════════════════════════════════════════
+       MOBILE STICKY CTA BAR
+       ════════════════════════════════════════════════════════════ -->
+  <div class="mobile-cta" id="mobileCta" aria-hidden="true">
+    <div class="mobile-cta__meta">
+      <strong>1 août · 20h GMT</strong>
+      15 € · place créditée
+    </div>
+    <a href="#reserve" class="btn btn-primary btn-sm" data-payment-cta>
+      Réserver
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:14px;height:14px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
 
-    function showSuccess() {
-      form.hidden = true;
-      if (micro) micro.hidden = true;
-      success.hidden = false;
-      success.scrollIntoView({ behavior: "smooth", block: "center" });
+  <!-- ════════════════════════════════════════════════════════════
+       PAYMENT MODAL — opens on every [data-payment-cta] click.
+       Two options: Chariow (mobile money, Afrique recommended) +
+       Stripe (international card). Closes on backdrop / X / Escape.
+       Lives outside <main> so it overlays everything cleanly.
+       ════════════════════════════════════════════════════════════ -->
+  <div class="payment-modal" id="paymentModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="paymentModalTitle">
+    <div class="payment-modal__backdrop" data-payment-close aria-hidden="true"></div>
+
+    <div class="payment-modal__panel" role="document">
+      <header class="payment-modal__head">
+        <p class="preheader"><span class="slash">/</span> Mode de paiement</p>
+        <h2 id="paymentModalTitle" class="payment-modal__title">
+          Comment veux-tu <em>payer&nbsp;?</em>
+        </h2>
+        <p class="payment-modal__sub">
+          Ta place est réservée dans les deux cas. Choisis ce qui te va le mieux.
+        </p>
+        <button type="button" class="payment-modal__close" data-payment-close aria-label="Fermer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </header>
+
+      <div class="payment-modal__options">
+        <a href="#" class="payment-option payment-option--chariow payment-option--recommended" data-provider="chariow" rel="noopener">
+          <span class="payment-option__icon" aria-hidden="true"><img src="chariow.png" alt="" width="34" height="34" /></span>
+          <div>
+            <div class="payment-option__title">
+              Chariow
+              <span class="payment-option__badge">Recommandé Afrique</span>
+            </div>
+            <p class="payment-option__body">
+              Mobile money — Wave, Orange Money, MTN MoMo, Moov. Paiement local instantané.
+            </p>
+          </div>
+          <svg class="payment-option__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <a href="#" class="payment-option payment-option--stripe" data-provider="stripe" rel="noopener">
+          <span class="payment-option__icon" aria-hidden="true"><img src="stripe.png" alt="" width="48" height="48" /></span>
+          <div>
+            <div class="payment-option__title">Stripe</div>
+            <p class="payment-option__body">
+              Carte bancaire internationale — Visa, Mastercard, Amex. Paiement sécurisé.
+            </p>
+          </div>
+          <svg class="payment-option__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <p class="payment-modal__foot">15 € · paiement unique · accès immédiat</p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════
+       SCRIPT — inline so first paint has zero JS round-trip
+       ════════════════════════════════════════════════════════════ -->
+  <script>
+    const CONFIG = {
+      // ─── Per-provider checkout URLs — replace each independently
+      STRIPE_URL: "#TO_BE_REPLACED_WITH_STRIPE_CHECKOUT_URL",
+      CHARIOW_URL: "#TO_BE_REPLACED_WITH_CHARIOW_CHECKOUT_URL",
+      // ─── WhatsApp group ─── redirect after payment success
+      WHATSAPP_URL: "#TO_BE_REPLACED_WITH_WHATSAPP_GROUP_URL",
+      // Workshop target — 1 August 2026 20:00 GMT (= UTC)
+      TARGET: new Date(Date.UTC(2026, 7, 1, 20, 0, 0)),
+    };
+
+    /* ════════════════════════════════════════════════════════════
+       PAYMENT MODAL — intercepts every [data-payment-cta] click and
+       opens a chooser modal with two options (Chariow + Stripe).
+       Each option carries [data-provider] and gets its href set from
+       CONFIG above, so swapping checkout URLs is a one-line change.
+       ════════════════════════════════════════════════════════════ */
+    const paymentModal = document.getElementById("paymentModal");
+
+    // 1. Wire the two option cards to their checkout URLs.
+    const PAYMENT_OPTIONS = {
+      stripe: CONFIG.STRIPE_URL,
+      chariow: CONFIG.CHARIOW_URL,
+    };
+    document.querySelectorAll("[data-provider]").forEach((el) => {
+      const url = PAYMENT_OPTIONS[el.getAttribute("data-provider")];
+      if (url) el.setAttribute("href", url);
+    });
+
+    // 2. Open/close primitives — class toggle + ARIA + body scroll lock.
+    function openPaymentModal() {
+      paymentModal.classList.add("is-open");
+      paymentModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("is-modal-open");
+      const firstOption = paymentModal.querySelector(".payment-option");
+      if (firstOption) firstOption.focus();
+    }
+    function closePaymentModal() {
+      paymentModal.classList.remove("is-open");
+      paymentModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("is-modal-open");
     }
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (form.querySelector('[name="_company"]').value) return; // honeypot
-      if (!form.reportValidity()) return;
+    // 3. Intercept every page CTA — open modal instead of navigating.
+    //    href fallback set to "#reserve" so users without JS still get
+    //    bounced to the value-stack section (where the CTA explains).
+    document.querySelectorAll("[data-payment-cta]").forEach((el) => {
+      el.setAttribute("href", "#reserve");
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        openPaymentModal();
+      });
+    });
 
-      const btn = form.querySelector('[type="submit"]');
-      const original = btn.innerHTML;
-      btn.disabled = true;
-      btn.textContent = "Un instant…";
-
-      try {
-        const r = await fetch("/api/waitlist", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            prenom: form.prenom.value.trim(),
-            email: form.email.value.trim(),
-            _company: "",
-          }),
-        });
-        if (r.ok || r.status === 503) {
-          if (r.status === 503) console.warn("[VISIBLE] /api/waitlist pas encore configuré (clés Resend manquantes dans Vercel).");
-          showSuccess();
-        } else {
-          const d = await r.json().catch(() => ({}));
-          throw new Error(d.error || "Erreur.");
-        }
-      } catch (err) {
-        btn.disabled = false;
-        btn.innerHTML = original;
-        alert("Oups, réessaie dans un instant — ou écris-nous si ça persiste.");
+    // 4. Close handlers — backdrop / X button / Escape key.
+    document.querySelectorAll("[data-payment-close]").forEach((el) => {
+      el.addEventListener("click", closePaymentModal);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && paymentModal.classList.contains("is-open")) {
+        closePaymentModal();
       }
     });
 
-    /* reveal on scroll */
+    const pad = (n) => String(Math.max(0, n)).padStart(2, "0");
+    const $ = (id) => document.getElementById(id);
+
+    function tickCountdown() {
+      const diff = CONFIG.TARGET.getTime() - Date.now();
+      const safe = Math.max(0, diff);
+      const days = Math.floor(safe / 86_400_000);
+      const hours = Math.floor((safe % 86_400_000) / 3_600_000);
+      const mins = Math.floor((safe % 3_600_000) / 60_000);
+      const secs = Math.floor((safe % 60_000) / 1_000);
+      // setIf handles missing IDs — the hero countdown (cd-*) and the
+      // final-CTA mirror countdown (cd-*-2) both update from this one tick.
+      const setIf = (id, val) => { const el = $(id); if (el) el.textContent = val; };
+      setIf("cd-days", pad(days));
+      setIf("cd-hours", pad(hours));
+      setIf("cd-mins", pad(mins));
+      setIf("cd-secs", pad(secs));
+      setIf("cd-days-2", pad(days));
+      setIf("cd-hours-2", pad(hours));
+      setIf("cd-mins-2", pad(mins));
+      setIf("cd-secs-2", pad(secs));
+      const inlineDays = $("countdown-days-inline");
+      if (inlineDays) inlineDays.textContent = days;
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+
+    const scrollBar = $("scrollBar");
+    const nav = $("nav");
+    const mobileCta = $("mobileCta");
+    let navScrolled = false;
+    let mobileVisible = false;
+
+    function onScroll() {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (y / max) * 100 : 0;
+      scrollBar.style.width = pct + "%";
+
+      const shouldSolidify = y > 60;
+      if (shouldSolidify !== navScrolled) {
+        navScrolled = shouldSolidify;
+        nav.classList.toggle("is-scrolled", shouldSolidify);
+      }
+      const shouldShowMobile = y > 500;
+      if (shouldShowMobile !== mobileVisible) {
+        mobileVisible = shouldShowMobile;
+        mobileCta.classList.toggle("is-visible", shouldShowMobile);
+        mobileCta.setAttribute("aria-hidden", !shouldShowMobile);
+      }
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     } else {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) { entry.target.classList.add("is-visible"); io.unobserve(entry.target); }
-        });
-      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+      );
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     }
+
+    try {
+      const tzName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const local = new Intl.DateTimeFormat("fr-FR", {
+        weekday: "short",
+        day: "2-digit",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: tzName,
+      }).format(CONFIG.TARGET);
+      const elLocal = $("tz-local");
+      const elName = $("tz-name");
+      const elValue = $("tz-value");
+      if (elLocal && elName && elValue) {
+        const cityRaw = tzName.split("/").pop() || tzName;
+        elName.textContent = cityRaw.replace(/_/g, " ");
+        elValue.textContent = local;
+        elLocal.hidden = false;
+      }
+    } catch (_) { /* fallback table handles it */ }
+
+    const barcode = $("barcode");
+    if (barcode) {
+      const seed = "ACADWS01VISIBLE20260801";
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < 56; i++) {
+        const c = seed.charCodeAt(i % seed.length);
+        const bar = document.createElement("i");
+        const wide = (c + i) % 5 === 0;
+        bar.style.width = wide ? "3px" : "1.5px";
+        bar.style.opacity = (c % 3 === 0) ? "0.55" : "1";
+        frag.appendChild(bar);
+      }
+      barcode.appendChild(frag);
+    }
   </script>
+
 </body>
 </html>

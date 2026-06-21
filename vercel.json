@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/workshop", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
