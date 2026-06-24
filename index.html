@@ -1817,9 +1817,25 @@
       margin-top: 1.5rem;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.75rem;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
     }
-    @media (min-width: 640px) { .blueprint__grid { grid-template-columns: 1fr 1fr; gap: 1rem; } }
+    @media (min-width: 640px) { .blueprint__grid { grid-template-columns: 1fr 1fr; } }
+    /* Quads as a hairline-divided form (no inner boxes) — reads like a real one-pager. */
+    .blueprint .blueprint__quad {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 1.4rem 1.5rem;
+    }
+    .blueprint .blueprint__quad:last-child { border-bottom: 0; }
+    @media (min-width: 640px) {
+      .blueprint .blueprint__quad:nth-child(odd) { border-right: 1px solid var(--border); }
+      .blueprint .blueprint__quad:nth-child(n+3) { border-bottom: 0; }
+    }
 
     .blueprint__quad {
       padding: 1.5rem;
@@ -1884,24 +1900,40 @@
     }
 
     /* ── JOURNEY — inVISIBLE → VISIBLE, 4-phase frieze ── */
-    .journey { display: grid; gap: 0.85rem; margin-top: 2rem; }
-    @media (min-width: 768px) { .journey { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
-    .journey__step {
-      position: relative;
-      padding: 1.5rem 1.25rem;
-      background: var(--card);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-    }
-    @media (min-width: 768px) {
-      .journey__step:not(:last-child)::after {
-        content: "→";
-        position: absolute; right: -1.05rem; top: 2.4rem;
-        color: var(--primary); font-size: 1.1rem; line-height: 1;
+    /* ── JOURNEY — progress path: numbered nodes on a connecting line. ── */
+    .journey { display: grid; gap: 2rem 0; margin-top: 2.5rem; position: relative; }
+    @media (min-width: 760px) {
+      .journey { grid-template-columns: repeat(4, 1fr); gap: 0; }
+      /* one continuous teal path through the node centres */
+      .journey::before {
+        content: "";
+        position: absolute;
+        top: 1.2rem; left: 1.2rem; right: calc(25% - 1.2rem);
+        height: 2px; background: oklch(0.5 0.10 175 / 25%); z-index: 0;
       }
     }
-    .journey__num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--primary); }
-    .journey__title { margin-top: 0.5rem; font-size: 1.35rem; }
+    .journey__step { position: relative; padding-left: 3.4rem; min-height: 2.4rem; }
+    @media (min-width: 760px) { .journey__step { padding-left: 0; padding-top: 3.4rem; padding-right: 1.25rem; } }
+    /* vertical connector (mobile only) */
+    .journey__step:not(:last-child)::after {
+      content: ""; position: absolute;
+      left: 1.15rem; top: 2.6rem; bottom: -2rem; width: 2px;
+      background: oklch(0.5 0.10 175 / 25%); z-index: 0;
+    }
+    @media (min-width: 760px) { .journey__step:not(:last-child)::after { display: none; } }
+    /* node — the .journey__num span styled as a numbered circle */
+    .journey__num {
+      position: absolute; left: 0; top: 0;
+      width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500;
+      color: var(--primary); background: var(--background);
+      border: 1.5px solid oklch(0.5 0.10 175 / 45%); z-index: 1;
+    }
+    .journey__step--active .journey__num {
+      background: var(--primary); border-color: var(--primary); color: var(--primary-foreground);
+    }
+    .journey__title { font-size: 1.35rem; }
     .journey__body { margin-top: 0.4rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.5; }
     .journey__tag {
       display: inline-block; margin-top: 0.9rem;
@@ -2945,24 +2977,24 @@
         </div>
 
         <div class="journey reveal">
-          <div class="journey__step">
-            <span class="journey__num">/ 01</span>
+          <div class="journey__step journey__step--active">
+            <span class="journey__num">01</span>
             <h3 class="journey__title">Clarté</h3>
             <p class="journey__body">Savoir exactement qui tu es, et pour qui.</p>
             <span class="journey__tag">On commence ici, en direct</span>
           </div>
           <div class="journey__step">
-            <span class="journey__num">/ 02</span>
+            <span class="journey__num">02</span>
             <h3 class="journey__title">Crédibilité</h3>
             <p class="journey__body">Devenir une marque qu'on prend au sérieux.</p>
           </div>
           <div class="journey__step">
-            <span class="journey__num">/ 03</span>
+            <span class="journey__num">03</span>
             <h3 class="journey__title">Visibilité</h3>
             <p class="journey__body">Être remarqué par les bons clients — sans démarcher.</p>
           </div>
           <div class="journey__step">
-            <span class="journey__num">/ 04</span>
+            <span class="journey__num">04</span>
             <h3 class="journey__title">Clients</h3>
             <p class="journey__body">Des clients réguliers, et bien payés.</p>
           </div>
