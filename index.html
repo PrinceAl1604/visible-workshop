@@ -1511,6 +1511,22 @@
       text-transform: uppercase;
     }
 
+    /* ── Brand-green spotlight (applied to the credibility section).
+       Deep teal gradient (same green as the countdown card); heading +
+       lead flip to light, and the stat cards stay white so they pop. ── */
+    .section--brand {
+      background:
+        radial-gradient(120% 85% at 0% 0%, oklch(0.42 0.09 175), transparent 60%),
+        linear-gradient(155deg, oklch(0.36 0.08 175) 0%, oklch(0.22 0.06 175) 100%);
+      border-block: 1px solid oklch(0.24 0.06 175);
+    }
+    .section--brand .preheader { color: oklch(0.86 0.06 175); }
+    .section--brand .preheader .slash { color: oklch(0.92 0.10 175); }
+    .section--brand .credibility__title { color: oklch(0.99 0.01 175); }
+    .section--brand .credibility__title em { color: oklch(0.85 0.11 175); }
+    .section--brand .credibility__lead { color: oklch(0.90 0.02 175); }
+    .section--brand .credibility__stat { background: var(--card); border-color: oklch(1 0 0 / 12%); }
+
     /* ── CREDIBILITY — "Why listen to me" stats grid ─────────── */
     .credibility {
       max-width: 60rem;
@@ -2631,7 +2647,7 @@
     <!-- ════════════════════════════════════════════════════════════
          2 — WHY LISTEN TO ME (credibility stats + photo)
          ════════════════════════════════════════════════════════════ -->
-    <section class="section section--alt">
+    <section class="section section--brand">
       <div class="container">
         <div class="credibility">
           <div class="reveal">
