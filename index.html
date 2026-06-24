@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f7f4ec" />
 
-  <title>VISIBLE · Workshop live de 90 min — 1 août 2026</title>
-  <meta name="description" content="De designer invisible à designer demandé. 90 min en direct avec Alex pour transformer ton talent en marque qui attire des clients premium — sans démarcher. Samedi 1 août, 20h GMT. 15 € · replay inclus." />
+  <title>VISIBLE · Atelier — de inVISIBLE à VISIBLE · 1ᵉʳ août 2026</title>
+  <meta name="description" content="Tu as le talent, mais le marché ne te voit pas. Atelier en direct le 1ᵉʳ août, 20h GMT, avec Alex (LogoMint) : tu repars avec ton verdict de marque. 15 €, crédité sur l'abonnement VISIBLE." />
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="VISIBLE · Workshop live · 1 août 2026" />
-  <meta property="og:description" content="De designer invisible à designer demandé. 90 min en direct, 15 €, replay inclus." />
+  <meta property="og:title" content="VISIBLE · Tu as le talent. Mais le marché ne te voit pas." />
+  <meta property="og:description" content="Atelier en direct le 1ᵉʳ août. Repars avec ton verdict de marque. Le talent ne paie pas. La marque, si." />
   <meta property="og:image" content="og-cover.jpg" />
   <meta property="og:locale" content="fr_FR" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VISIBLE · Workshop live" />
-  <meta name="twitter:description" content="De designer invisible à designer demandé. 90 min en direct, 15 €." />
+  <meta name="twitter:title" content="VISIBLE · Atelier — de inVISIBLE à VISIBLE" />
+  <meta name="twitter:description" content="Le talent ne paie pas. La marque, si. Atelier le 1ᵉʳ août, 15 €." />
   <meta name="twitter:image" content="og-cover.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -358,35 +358,26 @@
        <img> scales by height so the brand letterforms hit clamp() the
        same way the previous text-based H1 did. Aspect 4.13:1 means a
        100px height → ~413px width. */
-    .hero__title {
+    /* Hero signature — the brand line (Apple Garamond italic), above the H1. */
+    .hero__signature {
       margin-top: 1.5rem;
-      line-height: 1;
-      font-size: 0;
-    }
-    .hero__title-img {
-      height: clamp(3.5rem, 13vw, 8rem);
-      width: auto;
-      display: block;
-      max-width: 100%;
-    }
-    /* Hero baseline — the brand tagline, sits right under the wordmark
-       (brief §5.2). Garamond italic on the payoff word ("demandé")
-       matches the editorial em-accent used everywhere else. */
-    .hero__baseline {
-      margin-top: 1.1rem;
-      max-width: 30rem;
-      font-size: clamp(1.2rem, 2.8vw, 1.7rem);
-      line-height: 1.15;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      color: var(--foreground);
-    }
-    .hero__baseline em {
-      font-style: italic;
       font-family: var(--font-serif);
-      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.5vw, 1.5rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
       color: var(--primary);
     }
+    /* Hero H1 — the reframe. Sans/Helvetica bold; the emotional turn in teal. */
+    .hero__h1 {
+      margin-top: 0.65rem;
+      font-size: clamp(2.05rem, 6.4vw, 3.7rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+      max-width: 15ch;
+    }
+    .hero__h1 .accent { color: var(--primary); }
     .hero__sub {
       margin-top: 1.75rem;
       color: var(--foreground);
@@ -866,6 +857,32 @@
       font-size: clamp(1rem, 1.6vw, 1.15rem);
       line-height: 1.7;
     }
+    .problem__pains {
+      margin: 1.75rem auto 0;
+      max-width: 34rem;
+      display: grid;
+      gap: 0.6rem;
+      text-align: left;
+    }
+    .problem__pains li {
+      padding: 0.85rem 1.15rem;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      color: var(--foreground-soft);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    .problem__punch {
+      margin-top: 2rem;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 3.2vw, 1.95rem);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--foreground);
+    }
+    .problem__punch .inv { color: var(--primary); }
 
     /* ── TL;DR — 5 condensed bullets ─────────────────────────── */
     .tldr {
@@ -1834,6 +1851,38 @@
       color: var(--foreground);
     }
 
+    /* ── JOURNEY — inVISIBLE → VISIBLE, 4-phase frieze ── */
+    .journey { display: grid; gap: 0.85rem; margin-top: 2rem; }
+    @media (min-width: 768px) { .journey { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+    .journey__step {
+      position: relative;
+      padding: 1.5rem 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+    }
+    @media (min-width: 768px) {
+      .journey__step:not(:last-child)::after {
+        content: "→";
+        position: absolute; right: -1.05rem; top: 2.4rem;
+        color: var(--primary); font-size: 1.1rem; line-height: 1;
+      }
+    }
+    .journey__num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--primary); }
+    .journey__title { margin-top: 0.5rem; font-size: 1.35rem; }
+    .journey__body { margin-top: 0.4rem; color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.5; }
+    .journey__tag {
+      display: inline-block; margin-top: 0.9rem;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--primary); background: var(--primary-soft);
+      padding: 0.3rem 0.6rem; border-radius: 999px;
+    }
+    .journey__note {
+      max-width: 46rem; margin: 1.75rem auto 0; text-align: center;
+      color: var(--muted-foreground); font-size: 0.95rem; line-height: 1.6;
+    }
+    .journey__note strong { color: var(--foreground); font-weight: 600; }
+
     /* ════════════════════════════════════════════════════════════
        BONUSES — live-only bonuses dedicated section (brief 5.8).
        Two cards, glow border + corner badge that says "LIVE ONLY"
@@ -2548,30 +2597,27 @@
           <!-- LEFT COLUMN — copy + CTAs (à la Tom) -->
           <div class="reveal">
             <p class="preheader">
-              <span class="slash">/</span> WORKSHOP LIVE · SAM. 1 AOÛT 2026 · 20H GMT · 90 MIN
+              <span class="slash">/</span> ATELIER EN LIGNE · SAM. 1ᵉʳ AOÛT 2026 · 20H GMT
             </p>
 
-            <h1 class="hero__title">
-              <img src="logo.svg" alt="VISIBLE" class="hero__title-img" />
-            </h1>
+            <p class="hero__signature">Le talent ne paie pas. La marque, si.</p>
 
-            <p class="hero__baseline">De designer invisible à <em>designer demandé.</em></p>
+            <h1 class="hero__h1">Tu as le talent.<br /><span class="accent">Mais le marché ne te voit pas.</span></h1>
 
             <p class="hero__sub">
-              En 90 minutes en direct avec Alex, transforme ton talent de designer en
-              <em>une marque qui attire des clients premium (1&nbsp;000€+)</em>,
-              sans démarcher.
+              Atelier en ligne, en direct avec <strong style="font-weight:500">Alex (LogoMint)</strong>.
+              En 90 minutes, tu repars avec <em>ton verdict de marque</em> — le diagnostic clair de ce qui te rend invisible.
             </p>
 
             <div class="hero__ctas">
-              <a href="#reserve" class="btn btn-primary btn-lg" data-payment-cta>
-                Je réserve ma place — 15 €
+              <a href="#tarif" class="btn btn-primary btn-lg" data-payment-cta>
+                Réserver ma place — 15 €
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
               </a>
             </div>
 
             <p class="hero__microcopy">
-              <span>/</span> 90 MIN · EN DIRECT · REPLAY INCLUS · PLACE CRÉDITÉE SUR L'ABONNEMENT VISIBLE
+              <span>/</span> CRÉDITÉ SUR TON ABONNEMENT · PLACES LIMITÉES · REPLAY 48H APRÈS LE DIRECT
             </p>
           </div>
 
@@ -2630,10 +2676,10 @@
             <a href="#blueprint" class="blueprint-preview">
               <div class="blueprint-preview__thumb" aria-hidden="true"></div>
               <div>
-                <p class="blueprint-preview__label">TON BRAND BLUEPRINT</p>
-                <h3 class="blueprint-preview__title">Tu le construis avec Alex, en direct.</h3>
+                <p class="blueprint-preview__label">MINI BRAND BLUEPRINT</p>
+                <h3 class="blueprint-preview__title">Ton verdict de marque, en direct.</h3>
                 <p class="blueprint-preview__body">
-                  Une page complète — positionnement, marque, contenu — finie à la fin des 90 min.
+                  Le diagnostic clair de ce qui te rend invisible — rempli avec toi pendant les 90 min.
                 </p>
               </div>
             </a>
@@ -2690,19 +2736,21 @@
     <!-- ════════════════════════════════════════════════════════════
          4 — PROBLEM
          ════════════════════════════════════════════════════════════ -->
-    <section class="section">
+    <section class="section" id="probleme">
       <div class="container">
         <div class="problem reveal">
-          <p class="preheader"><span class="slash">/</span> Le constat</p>
+          <p class="preheader"><span class="slash">/</span> Le vrai problème</p>
           <h2 class="problem__title">
-            Tu es un excellent designer.<br />
-            Mais <em>personne ne le sait</em>.
+            Ce n'est pas que « le design <em>n'est pas valorisé ici</em> ».
           </h2>
-          <p class="problem__body">
-            Tu livres du super travail. Pourtant tu cours encore après les clients, tu te bats sur les prix
-            sur Malt ou en DM, et tu vois des designers deux fois moins bons que toi décrocher de meilleurs contrats.
-            <br /><br />
-            Le problème n'est pas ton talent. C'est que tu es invisible — et l'invisibilité, ça te garde fauché.
+          <ul class="problem__pains">
+            <li>« Je publie tous les jours… et toujours zéro client. »</li>
+            <li>« Je brade mes prix juste pour décrocher un projet. »</li>
+            <li>« Je ne sais même pas si le problème vient de moi. »</li>
+          </ul>
+          <p class="problem__punch">
+            La vérité : tu n'es pas incompétent. Tu es <span class="inv">inVISIBLE</span>.
+            Et on ne paie jamais ce qu'on ne voit pas.
           </p>
         </div>
       </div>
@@ -2730,7 +2778,7 @@
             <div class="tldr__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-            <p class="tldr__text"><strong>90 min en direct</strong> le samedi 1 août, 20h GMT. Pas dispo ? <strong>Replay inclus</strong>.</p>
+            <p class="tldr__text"><strong>90 min en direct</strong> le samedi 1ᵉʳ août, 20h GMT. Pas dispo ? <strong>Replay 48h</strong> après.</p>
           </div>
 
           <div class="tldr__item reveal" style="transition-delay: 120ms">
@@ -2744,7 +2792,7 @@
             <div class="tldr__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
             </div>
-            <p class="tldr__text">Tu repars avec <strong>Ton Brand Blueprint</strong>, une page construite en live — pas juste des notes.</p>
+            <p class="tldr__text">Tu repars avec <strong>ton verdict de marque</strong>, construit en live — pas juste des notes.</p>
           </div>
 
           <div class="tldr__item reveal" style="transition-delay: 240ms">
@@ -2760,49 +2808,44 @@
     <!-- ════════════════════════════════════════════════════════════
          6 — WHAT WE'LL BUILD (3 BLOCKS)
          ════════════════════════════════════════════════════════════ -->
-    <section class="section" id="what">
+    <section class="section" id="ce-que-tu-repars-avec">
       <div class="container">
         <div class="section__header reveal">
-          <p class="preheader"><span class="slash">/</span> Ce qu'on va construire ensemble</p>
-          <h2 class="section__title">3 blocs, finis pendant l'appel.</h2>
+          <p class="preheader"><span class="slash">/</span> Ce que tu repars avec</p>
+          <h2 class="section__title">En 90 minutes, tu repars avec <em style="color:var(--primary)">ton verdict de marque.</em></h2>
           <p class="section__lead">
-            Pas un cours qu'on écoute. Trois sprints concrets —
-            <strong style="color:var(--foreground);font-weight:500">chaque bloc remplit une partie de ton Brand Blueprint</strong>.
+            Pas un cours qu'on écoute et qu'on oublie. Un diagnostic clair, construit avec toi en direct.
           </p>
         </div>
 
         <div class="blocks">
           <div class="card reveal">
-            <div class="block__num">/ Bloc 01 · remplit la zone 1 du Blueprint</div>
-            <div class="block__time">≈ 25 min</div>
-            <h3 class="block__title">Ton positionnement + ton client de rêve.</h3>
+            <div class="block__num">/ 01 · Le diagnostic</div>
+            <h3 class="block__title">Pourquoi tu es inVISIBLE.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              Ta phrase « <strong style="color:var(--foreground);font-weight:500">J'aide … à … grâce à …</strong> » —
-              celle qui te rend impossible à confondre. Plus le portrait précis de ton client de rêve :
-              qui il est, ce qu'il veut, où il traîne.
+              La raison <strong style="color:var(--foreground);font-weight:500">précise</strong> pour laquelle le marché ne te voit pas encore.
+              Pas une vague impression — un constat clair sur ton positionnement et ton image.
             </p>
           </div>
 
           <div class="card reveal" style="transition-delay: 100ms">
-            <div class="block__num">/ Bloc 02 · remplit la zone 2 du Blueprint</div>
-            <div class="block__time">≈ 30 min</div>
-            <h3 class="block__title">Ta marque visible + audit de ton profil.</h3>
+            <div class="block__num">/ 02 · Le livrable</div>
+            <h3 class="block__title">Ton Mini Brand Blueprint.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              Tes <strong style="color:var(--foreground);font-weight:500">3 mots de marque</strong> et ta direction visuelle.
-              Plus l'audit express de ton profil actuel — <strong style="color:var(--foreground);font-weight:500">note /10 + 3 corrections</strong> à appliquer cette semaine.
+              Le plan de ta marque sur <strong style="color:var(--foreground);font-weight:500">une page</strong> — positionnement, direction visuelle, contenu —
+              rempli en direct pendant la session. Tu repars avec, pas avec des notes.
             </p>
           </div>
 
           <div class="card reveal" style="transition-delay: 200ms">
-            <div class="block__num">/ Bloc 03 · remplit la zone 3 du Blueprint</div>
-            <div class="block__time">≈ 35 min</div>
-            <h3 class="block__title">Ton système d'attraction.</h3>
+            <div class="block__num">/ 03 · Le premier pas</div>
+            <h3 class="block__title">Ta première action de Clarté.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              Tes <strong style="color:var(--foreground);font-weight:500">3 piliers de contenu</strong> — les angles qui font venir les clients à toi, sans démarcher.
-              Plus le brief de ton premier <strong style="color:var(--foreground);font-weight:500">contenu-aimant</strong> à publier dans les 7 jours.
+              Le geste <strong style="color:var(--foreground);font-weight:500">concret</strong> à poser dès cette semaine pour amorcer ton passage
+              d'inVISIBLE à VISIBLE. Clair, faisable, sans démarcher.
             </p>
           </div>
         </div>
@@ -2818,18 +2861,17 @@
     <section id="blueprint" class="section section--alt">
       <div class="container">
         <div class="section__header reveal">
-          <p class="preheader"><span class="slash">/</span> Ce que tu repars avec</p>
-          <h2 class="section__title">Tu ne repars pas avec des notes. <em style="color:var(--primary)">Tu repars avec un plan.</em></h2>
+          <p class="preheader"><span class="slash">/</span> Le livrable en détail</p>
+          <h2 class="section__title">À quoi ressemble <em style="color:var(--primary)">ton Mini Brand Blueprint.</em></h2>
           <p class="section__lead">
-            <strong style="color:var(--foreground);font-weight:500">Ton Brand Blueprint</strong> :
-            le plan complet de ta marque-aimant, sur une seule page,
-            construit avec toi en direct pendant les 90 min.
+            <strong style="color:var(--foreground);font-weight:500">Ton Mini Brand Blueprint</strong> :
+            le diagnostic de ta marque sur une seule page, construit avec toi en direct pendant les 90 min.
           </p>
         </div>
 
         <div class="reveal blueprint">
           <div class="blueprint__head">
-            <span class="blueprint__brand"><strong>VISIBLE</strong> · TON BRAND BLUEPRINT</span>
+            <span class="blueprint__brand"><strong>VISIBLE</strong> · MINI BRAND BLUEPRINT</span>
             <span class="blueprint__id">N° 0001 / [TON NOM]</span>
           </div>
 
@@ -2869,6 +2911,51 @@
     </section>
 
     <!-- ════════════════════════════════════════════════════════════
+         6.7 — TRANSFORMATION — inVISIBLE → VISIBLE (the mechanism)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="section" id="transformation">
+      <div class="container">
+        <div class="section__header reveal">
+          <p class="preheader"><span class="slash">/</span> La méthode</p>
+          <h2 class="section__title">De inVISIBLE à VISIBLE, <em style="color:var(--primary)">la marque par le design.</em></h2>
+          <p class="section__lead">
+            Un parcours en 4 phases. Le workshop t'en fait vivre l'amorce — la
+            <strong style="color:var(--foreground);font-weight:500">Clarté</strong>.
+          </p>
+        </div>
+
+        <div class="journey reveal">
+          <div class="journey__step">
+            <span class="journey__num">/ 01</span>
+            <h3 class="journey__title">Clarté</h3>
+            <p class="journey__body">Savoir exactement qui tu es, et pour qui.</p>
+            <span class="journey__tag">On commence ici, en direct</span>
+          </div>
+          <div class="journey__step">
+            <span class="journey__num">/ 02</span>
+            <h3 class="journey__title">Crédibilité</h3>
+            <p class="journey__body">Devenir une marque qu'on prend au sérieux.</p>
+          </div>
+          <div class="journey__step">
+            <span class="journey__num">/ 03</span>
+            <h3 class="journey__title">Visibilité</h3>
+            <p class="journey__body">Être remarqué par les bons clients — sans démarcher.</p>
+          </div>
+          <div class="journey__step">
+            <span class="journey__num">/ 04</span>
+            <h3 class="journey__title">Clients</h3>
+            <p class="journey__body">Des clients réguliers, et bien payés.</p>
+          </div>
+        </div>
+
+        <p class="journey__note reveal">
+          Le workshop amorce la <strong>Clarté</strong>. Le parcours complet — Crédibilité, Visibilité,
+          Clients en 90 jours — c'est l'abonnement <strong>VISIBLE</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════
          7 — VALUE STACK + CTA
          ════════════════════════════════════════════════════════════ -->
     <section class="section section--alt" id="reserve">
@@ -2887,7 +2974,7 @@
             <span class="stack__value">29 000 FCFA</span>
           </div>
           <div class="stack__row stack__row--star">
-            <span class="stack__label">02 · Ton Brand Blueprint — template designé, rempli en direct</span>
+            <span class="stack__label">02 · Ton Mini Brand Blueprint — rempli en direct</span>
             <span class="stack__value">19 000 FCFA</span>
           </div>
           <div class="stack__row">
@@ -2895,7 +2982,7 @@
             <span class="stack__value">9 000 FCFA</span>
           </div>
           <div class="stack__row">
-            <span class="stack__label">04 · Replay à vie · accès illimité</span>
+            <span class="stack__label">04 · Replay 48h après le direct</span>
             <span class="stack__value">15 000 FCFA</span>
           </div>
           <div class="stack__row stack__row--bonus">
@@ -2917,7 +3004,7 @@
             <div class="stack__price-big tabular">15<sup>€</sup></div>
             <div class="stack__price-fcfa">≈ 9 800 FCFA · paiement unique · mobile money</div>
             <a href="#" class="btn btn-primary btn-lg stack__cta" data-payment-cta>
-              Je réserve ma place — 15 €
+              Réserver ma place — 15 €
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
           </div>
@@ -3038,37 +3125,36 @@
     <!-- ════════════════════════════════════════════════════════════
          8.5 — POUR TOI / PAS POUR TOI (brief 5.10)
          ════════════════════════════════════════════════════════════ -->
-    <section class="section section--alt">
+    <section class="section section--alt" id="pour-qui">
       <div class="container">
         <div class="section__header reveal">
           <p class="preheader"><span class="slash">/</span> On joue franc-jeu</p>
-          <h2 class="section__title">Pour toi. <em style="color:var(--primary)">Ou pas du tout.</em></h2>
+          <h2 class="section__title">C'est pour toi. <em style="color:var(--primary)">Ou pas du tout.</em></h2>
         </div>
 
         <div class="audience-grid">
           <div class="audience-card audience-card--yes reveal">
             <div class="audience-card__head">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              <h3>Pour toi si</h3>
+              <h3>C'est pour toi si…</h3>
             </div>
             <ul>
-              <li>Tu es bon dans ton métier mais personne ne le sait encore.</li>
-              <li>Tu veux des clients premium sans devoir démarcher.</li>
-              <li>Tu es prêt à passer à l'action — pas juste à écouter.</li>
-              <li>Tu vends un service (design, dev, montage, conseil…).</li>
+              <li>Tu es designer et tu sais que ton travail est bon.</li>
+              <li>Tu publies déjà, mais ça ne te ramène pas de clients.</li>
+              <li>Tu veux vivre de ton design — pas enchaîner les extras gratuits.</li>
+              <li>Tu es prêt·e à devenir une marque, pas juste un freelance de plus.</li>
             </ul>
           </div>
 
           <div class="audience-card audience-card--no reveal" style="transition-delay: 120ms">
             <div class="audience-card__head">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              <h3>Pas pour toi si</h3>
+              <h3>Ce n'est pas pour toi si…</h3>
             </div>
             <ul>
-              <li>Tu cherches une recette magique « 10K€/mois sans rien faire ».</li>
-              <li>Tu ne vends aucun service ni produit créatif.</li>
-              <li>Tu refuses d'agir tant que tout n'est pas « parfait ».</li>
-              <li>Tu attends qu'on te livre du clé-en-main sans participer.</li>
+              <li>Tu débutes tout juste et tu n'as pas encore de pratique.</li>
+              <li>Tu cherches une recette magique sans rien changer à ton travail.</li>
+              <li>Tu veux des clients sans accepter de devenir une marque.</li>
             </ul>
           </div>
         </div>
@@ -3129,7 +3215,7 @@
               <ul>
                 <li>Atelier live 90 min</li>
                 <li>Worksheet en direct</li>
-                <li>Replay à vie</li>
+                <li>Replay 48h</li>
                 <li>Pack templates</li>
                 <li>Bonus en direct</li>
                 <li>Crédit 15€ sur abonnement VISIBLE</li>
@@ -3231,56 +3317,50 @@
 
         <div class="faq">
           <details class="faq__item reveal" open>
-            <summary class="faq__q">Et si je ne peux pas être là en direct ?</summary>
+            <summary class="faq__q">Je débute, c'est pour moi ?</summary>
             <div class="faq__a">
-              Le <strong>replay est inclus à vie</strong>, accessible dès la fin du workshop.
-              Tu pourras tout regarder à ton rythme. Petite contrepartie honnête : les
-              <strong>bonus en direct</strong> (audit live + Q&A étendu) restent, eux, réservés aux présents.
+              Honnêtement, pas encore. VISIBLE est fait pour les designers qui ont <strong>déjà une pratique et un bon travail</strong> —
+              ce qu'on règle ici, c'est ta <strong>visibilité</strong>, pas ta technique. Si tu débutes tout juste, garde-nous sous le coude.
             </div>
           </details>
 
           <details class="faq__item reveal" style="transition-delay: 60ms">
-            <summary class="faq__q">C'est pour moi si je débute ? Ou si je suis déjà avancé ?</summary>
+            <summary class="faq__q">C'est quoi le rapport avec l'abonnement VISIBLE ?</summary>
             <div class="faq__a">
-              <strong>Oui dans les deux cas.</strong> Tant que tu sais créer (design, dev, montage, conseil…),
-              on travaille ta visibilité. Les débutants partent avec une base claire,
-              les expérimentés reconstruisent leur positionnement.
+              Le workshop est la <strong>porte d'entrée</strong>. Tu y vis l'amorce de la méthode (ta Clarté) et tu repars avec ton verdict de marque.
+              Le parcours complet — Clarté → Crédibilité → Visibilité → Clients en 90 jours — c'est l'abonnement <strong>VISIBLE</strong>.
+              Tes 15 € sont crédités dessus si tu rejoins. Aucune obligation.
             </div>
           </details>
 
           <details class="faq__item reveal" style="transition-delay: 120ms">
-            <summary class="faq__q">Comment je paie ?</summary>
+            <summary class="faq__q">Et si je rate le direct ?</summary>
             <div class="faq__a">
-              <strong>Mobile money</strong> : Wave, Orange Money, MTN MoMo, Moov. <strong>Carte bancaire</strong> aussi.
-              Paiement sécurisé via Chariow. Juste après, tu es redirigé vers le <strong>groupe WhatsApp</strong> du
-              workshop — avec ton accès et le worksheet à remplir en direct.
+              Le <strong>replay est dispo 48h</strong> après le direct, en priorité aux participants. Mais le vrai jus est dans le live :
+              ton verdict se construit <strong>avec toi, en temps réel</strong>. Bloque le créneau.
             </div>
           </details>
 
           <details class="faq__item reveal" style="transition-delay: 180ms">
-            <summary class="faq__q">Les 15 € sont vraiment crédités ?</summary>
+            <summary class="faq__q">Comment payer depuis mon pays ?</summary>
             <div class="faq__a">
-              <strong>Oui, sans condition.</strong> Si tu rejoins l'abonnement <strong>VISIBLE</strong> (50 000 FCFA/mois)
-              après le workshop, les 15 € sont automatiquement déduits de ton premier mois.
-              Aucune obligation de rejoindre.
+              <strong>Mobile money</strong> (Wave, Orange Money, MTN MoMo, Moov) et <strong>carte bancaire</strong>, via un paiement sécurisé.
+              Que tu sois à Cotonou, Abidjan, Kinshasa, Dakar ou dans la diaspora, ça marche.
             </div>
           </details>
 
           <details class="faq__item reveal" style="transition-delay: 240ms">
-            <summary class="faq__q">Qu'est-ce que je repars avec ?</summary>
+            <summary class="faq__q">C'est en quelle langue ?</summary>
             <div class="faq__a">
-              <strong>Ton Brand Blueprint</strong> : le plan complet de ta marque sur une seule page,
-              designé et rempli en direct pendant les 90 minutes. Un PDF imprimable, à vie,
-              avec tes 4 zones complétées — positionnement, direction visuelle, 3 piliers, prochain pas.
+              <strong>100 % en français.</strong>
             </div>
           </details>
 
           <details class="faq__item reveal" style="transition-delay: 300ms">
-            <summary class="faq__q">J'ai besoin de quoi ?</summary>
+            <summary class="faq__q">15 €, c'est perdu si je ne m'abonne pas ?</summary>
             <div class="faq__a">
-              Un <strong>téléphone ou un ordi</strong>, une connexion correcte, et de quoi
-              remplir ton Brand Blueprint (on te fournit le template juste avant le live).
-              Prévois un coin tranquille pendant 90 min — tu en sortiras avec ta page finie.
+              Non. Même sans t'abonner, tu repars avec <strong>ton verdict de marque</strong> et ton Mini Brand Blueprint — la vraie valeur.
+              Et si tu rejoins VISIBLE ensuite, les 15 € sont <strong>crédités</strong> sur ton premier mois.
             </div>
           </details>
         </div>
@@ -3296,10 +3376,10 @@
       <div class="container">
         <div class="final-cta reveal">
           <p class="preheader"><span class="slash">/</span> Dernière chose</p>
-          <h2>De designer invisible<br />à <em>designer demandé.</em></h2>
+          <h2>Le 1ᵉʳ août, tu deviens <em>VISIBLE.</em></h2>
           <p class="final-cta__sub">
-            Le 1 août à 20h00 GMT, Alex démarre. Tu repars 90 min plus tard avec
-            <strong style="color:var(--foreground);font-weight:500">Ton Brand Blueprint</strong> fini dans la main.
+            À 20h00 GMT, Alex démarre. 90 minutes plus tard, tu repars avec
+            <strong style="color:var(--foreground);font-weight:500">ton verdict de marque</strong> — et le premier pas pour qu'on te voie enfin.
           </p>
 
           <div class="final-cta__countdown">
@@ -3325,14 +3405,14 @@
 
           <div class="final-cta__ctas">
             <a href="#" class="btn btn-primary btn-lg" data-payment-cta>
-              Je réserve ma place — 15 €
+              Réserver ma place — 15 €
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a href="#what" class="btn btn-outline btn-lg">Revoir le programme</a>
+            <a href="#ce-que-tu-repars-avec" class="btn btn-outline btn-lg">Revoir ce que tu obtiens</a>
           </div>
 
           <p class="final-cta__warning">
-            ⚠ Bonus en direct &amp; tarif ferment au démarrage
+            ⚠ Places limitées · tarif fondateur réservé aux participants
           </p>
         </div>
       </div>
