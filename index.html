@@ -1542,7 +1542,37 @@
     .section--brand .credibility__title { color: oklch(0.99 0.01 175); }
     .section--brand .credibility__title em { color: oklch(0.85 0.11 175); }
     .section--brand .credibility__lead { color: oklch(0.90 0.02 175); }
-    .section--brand .credibility__stat { background: var(--card); border-color: oklch(1 0 0 / 12%); }
+    /* Stats — editorial hairline grid (no boxes); big light numbers on the green. */
+    .section--brand .credibility__stats {
+      gap: 0;
+      border: 1px solid oklch(1 0 0 / 16%);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .section--brand .credibility__stat {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      border-right: 1px solid oklch(1 0 0 / 12%);
+      border-bottom: 1px solid oklch(1 0 0 / 12%);
+      padding: 1.5rem 1.4rem;
+    }
+    .section--brand .credibility__stat:nth-child(2n) { border-right: 0; }
+    .section--brand .credibility__stat:nth-child(n+3) { border-bottom: 0; }
+    .section--brand .credibility__stat-num {
+      color: oklch(0.98 0.012 175);
+      font-size: clamp(1.9rem, 4.4vw, 2.7rem);
+    }
+    .section--brand .credibility__stat:nth-child(3) .credibility__stat-num { font-size: clamp(1.35rem, 3.2vw, 1.9rem); }
+    .section--brand .credibility__stat-num em { color: oklch(0.82 0.13 175); }
+    .section--brand .credibility__stat-label { color: oklch(0.80 0.03 175); margin-top: 0.55rem; }
+    /* Photo — remove the light edge on the green (no border + dark fallback under the image). */
+    .section--brand .credibility__photo {
+      border: 0;
+      background:
+        url('alex.jpg') center 30% / cover no-repeat,
+        linear-gradient(165deg, oklch(0.20 0.05 175), oklch(0.13 0.04 175));
+    }
 
     /* ── CREDIBILITY — "Why listen to me" stats grid ─────────── */
     .credibility {
