@@ -884,36 +884,38 @@
     }
     .problem__punch .inv { color: var(--primary); }
 
-    /* ── TL;DR — 5 condensed bullets ─────────────────────────── */
+    /* ── TL;DR — editorial numbered list: one bordered card, hairline rows. ── */
     .tldr {
-      display: grid;
-      gap: 0.75rem;
-      max-width: 48rem;
+      max-width: 46rem;
       margin-inline: auto;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
     }
-    .tldr__item {
+    /* .tldr .tldr__item beats the shared T3 rule (white card) → flat hairline rows */
+    .tldr .tldr__item {
       display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      padding: 1.1rem 1.25rem;
-      background: oklch(0.16 0 0 / 60%);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      align-items: baseline;
+      gap: 1.1rem;
+      padding: 1.15rem 1.5rem;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      border-radius: 0;
     }
-    .tldr__icon {
+    .tldr .tldr__item:last-child { border-bottom: 0; }
+    .tldr__n {
       flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: oklch(0.62 0.09 175 / 14%);
+      width: 1.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
       color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
-    .tldr__icon svg { width: 16px; height: 16px; }
-    .tldr__text { color: var(--foreground); font-size: 0.95rem; }
-    .tldr__text strong { font-weight: 500; }
+    .tldr__text { color: var(--foreground-soft); font-size: 1rem; line-height: 1.5; }
+    .tldr__text strong { color: var(--foreground); font-weight: 600; }
 
     /* ── 3 BLOCKS — what you'll build ────────────────────────── */
     .blocks {
@@ -2798,40 +2800,26 @@
           <h2 class="section__title">L'essentiel, vite.</h2>
         </div>
 
-        <div class="tldr">
-          <div class="tldr__item reveal">
-            <div class="tldr__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>
-            </div>
-            <p class="tldr__text"><strong>15 €</strong> une fois — et tu repars avec <strong>ton verdict de marque</strong>, à toi pour de bon.</p>
+        <div class="tldr reveal">
+          <div class="tldr__item">
+            <span class="tldr__n">01</span>
+            <p class="tldr__text"><strong>15 € une fois</strong> — tu repars avec ton verdict de marque, à toi pour de bon.</p>
           </div>
-
-          <div class="tldr__item reveal" style="transition-delay: 60ms">
-            <div class="tldr__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <p class="tldr__text"><strong>90 min en direct</strong> le samedi 1ᵉʳ août, 20h GMT. Pas dispo ? <strong>Replay 48h</strong> après.</p>
+          <div class="tldr__item">
+            <span class="tldr__n">02</span>
+            <p class="tldr__text"><strong>90 min en direct</strong> — samedi 1ᵉʳ août, 20h GMT. Pas dispo ? Replay 48h.</p>
           </div>
-
-          <div class="tldr__item reveal" style="transition-delay: 120ms">
-            <div class="tldr__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
-            </div>
-            <p class="tldr__text">Pour les <strong>designers (et créatifs) talentueux mais invisibles</strong>. Débutant ou en activité.</p>
+          <div class="tldr__item">
+            <span class="tldr__n">03</span>
+            <p class="tldr__text"><strong>Pour les designers talentueux mais invisibles</strong> — déjà en activité, pas débutants.</p>
           </div>
-
-          <div class="tldr__item reveal" style="transition-delay: 180ms">
-            <div class="tldr__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            </div>
-            <p class="tldr__text">Tu repars avec <strong>ton verdict de marque</strong>, construit en live — pas juste des notes.</p>
+          <div class="tldr__item">
+            <span class="tldr__n">04</span>
+            <p class="tldr__text"><strong>Construit avec toi, en live</strong> — pas un cours qu'on écoute, un diagnostic qu'on remplit.</p>
           </div>
-
-          <div class="tldr__item reveal" style="transition-delay: 240ms">
-            <div class="tldr__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <p class="tldr__text">Les <strong>présents en direct</strong> reçoivent des <strong>bonus exclusifs</strong>.</p>
+          <div class="tldr__item">
+            <span class="tldr__n">05</span>
+            <p class="tldr__text"><strong>Places limitées</strong> — priorité aux présents le jour J.</p>
           </div>
         </div>
       </div>
