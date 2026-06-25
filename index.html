@@ -109,7 +109,7 @@
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
     img, svg { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
@@ -1265,13 +1265,19 @@
 
     /* ── ALEX ────────────────────────────────────────────────── */
     .prof {
-      max-width: 56rem;
+      max-width: 58rem;
       margin-inline: auto;
       display: grid;
       gap: 2rem;
-      align-items: center;
+      align-items: start;
     }
-    @media (min-width: 768px) { .prof { grid-template-columns: 0.8fr 1.2fr; gap: 3rem; } }
+    @media (min-width: 768px) {
+      .prof { grid-template-columns: 0.78fr 1.22fr; gap: 3.5rem; }
+      /* Photo stays pinned while the long bio scrolls past it.
+         `.prof .prof__photo` outranks the shared grain rule that sets
+         position:relative on .prof__photo later in the cascade. */
+      .prof .prof__photo { position: sticky; top: 5.5rem; align-self: start; }
+    }
     .prof__photo {
       aspect-ratio: 4 / 5;
       border-radius: var(--radius-2xl);
@@ -1308,8 +1314,33 @@
     }
     .prof__bio {
       margin-top: 1.25rem;
-      color: var(--muted-foreground);
+      color: var(--foreground-soft);
       line-height: 1.7;
+    }
+    .prof__bio > * + * { margin-top: 1rem; }
+    .prof__bio strong { color: var(--foreground); font-weight: 600; }
+    /* Emotional pull-lines — Garamond italic accent (the brand voice). */
+    .prof__bio-em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--primary);
+      font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+      line-height: 1.3;
+      margin-top: 1.6rem;
+    }
+    .prof__list { margin-top: 1rem; display: grid; gap: 0.6rem; }
+    .prof__list li {
+      position: relative;
+      padding-left: 1.5rem;
+      color: var(--foreground-soft);
+      line-height: 1.5;
+    }
+    .prof__list li::before {
+      content: "";
+      position: absolute; left: 0; top: 0.55em;
+      width: 0.5rem; height: 0.5rem;
+      border-radius: 50%;
+      background: var(--primary);
     }
     .prof__chips {
       margin-top: 1.5rem;
@@ -3335,21 +3366,31 @@
           <div>
             <h2 class="prof__title">Alex Landrin.</h2>
             <p class="prof__sub">Designer · Fondateur de LogoMint</p>
-            <p class="prof__bio">
-              Il y a quelques années, je galérais comme la plupart des designers africains :
-              du super travail, zéro client premium. J'avais le talent — pas la visibilité.
-              <br /><br />
-              Le déclic est venu en arrêtant de me vendre comme « designer freelance »
-              et en construisant <strong style="color:var(--foreground);font-weight:500">LogoMint</strong>
-              en mettant mon <em>personal branding</em> en avant —
-              le studio qui attire désormais les marques au lieu de les chasser.
-              <br /><br />
-              Avec <strong style="color:var(--foreground);font-weight:500">VISIBLE</strong>,
-              je transmets le système exact que j'ai utilisé. Aucune théorie. Que du terrain.
-            </p>
+            <div class="prof__bio">
+              <p>Moi, c'est Alex. Et avant d'aider des créatifs à devenir visibles, j'ai d'abord été <strong>invisible</strong>.</p>
+              <p>Ça fait huit ans que je suis designer, spécialisé dans la création d'identités visuelles. J'ai commencé en freelance, puis j'ai travaillé en agence comme consultant. Et pendant des années, j'ai cru qu'il suffisait d'être bon dans son métier pour réussir.</p>
+              <p class="prof__bio-em">Je me trompais.</p>
+              <p>Très vite, j'ai vu un problème que partagent énormément de créatifs, surtout en Afrique : on a le talent, mais on reste invisibles. On attend qu'un client vienne frapper à la porte. On galère à se faire payer à sa juste valeur. Et dans un milieu où le design graphique est encore peu valorisé, beaucoup finissent par détester le métier qu'ils aimaient.</p>
+              <p>Je connais cette réalité de l'intérieur. Je viens d'Afrique. Aujourd'hui je vis en Allemagne, mais je n'ai pas oublié d'où je viens : les coupures d'électricité, le manque de moyens, les formations hors de prix, le sentiment de travailler dur sans jamais joindre les deux bouts.</p>
+              <p>Il y a trois ans, j'ai commencé à partager mon expertise sur YouTube. Au début, je faisais des tutos — comment maîtriser Illustrator, Photoshop, créer une marque. Puis j'ai compris quelque chose de bien plus important : <strong>le talent ne paie pas. La marque, si.</strong></p>
+              <p>Tu peux maîtriser tous les logiciels du monde. Si tu ne sais pas vendre ton expertise, ça ne te servira à rien.</p>
+              <p>Alors j'ai arrêté de seulement enseigner des outils. J'ai créé mon agence, <strong>LogoMint</strong>, et j'ai pris le temps de comprendre ce qui fait vraiment la différence : la psychologie des clients, le positionnement, la marque personnelle. Il y a trois ans, je tournais mes vidéos dans une chambre de 15 m². Aujourd'hui, j'ai mon propre studio. Ce n'est pas mon talent qui a changé. C'est ma façon de le rendre visible.</p>
+              <p class="prof__bio-em">C'est exactement ça que je veux te transmettre.</p>
+              <p>Aujourd'hui, j'aide les créatifs francophones — designers, monteurs, développeurs, consultants — à sortir de l'invisibilité. Concrètement, ça veut dire :</p>
+              <ul class="prof__list">
+                <li>Construire une <strong>marque personnelle</strong> qui inspire confiance, sans avoir à se justifier.</li>
+                <li>Choisir un <strong>positionnement clair</strong>, parce que la polyvalence ne paie pas — la spécialisation, si.</li>
+                <li>Définir ton <strong>client idéal</strong>, pour enfin proposer la bonne offre à la bonne personne.</li>
+                <li>Partager ton expertise sur les réseaux : tes résultats, tes preuves, tes opinions, ton savoir.</li>
+              </ul>
+              <p>Tu n'as pas besoin de millions de vues. Même avec 200 personnes qui te regardent, il y en a toujours une qui a besoin de toi. C'est comme ça que tout commence.</p>
+              <p>Je l'ai fait pour moi. Je l'ai fait pour mes clients. Maintenant, je veux le faire avec toi.</p>
+              <p class="prof__bio-em">Parce que ton talent mérite d'être vu.</p>
+            </div>
             <div class="prof__chips">
-              <span class="prof__chip">Samedi · 20h GMT</span>
-              <span class="prof__chip">LogoMint · VISIBLE</span>
+              <span class="prof__chip">Fondateur de LogoMint</span>
+              <span class="prof__chip">8 ans de design</span>
+              <span class="prof__chip">Afrique → Allemagne</span>
             </div>
           </div>
         </div>
