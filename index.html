@@ -1607,6 +1607,43 @@
         linear-gradient(165deg, oklch(0.20 0.05 175), oklch(0.13 0.04 175));
     }
 
+    /* ── "Ce que tu repars avec" — same green brand surface, blocks
+       refactored into an editorial hairline grid (mirrors the stats
+       grid above): transparent cells, white hairline dividers, light
+       text. No boxes, no grain, no lift. ───────────────────────── */
+    #ce-que-tu-repars-avec .section__title { color: oklch(0.99 0.01 175); }
+    #ce-que-tu-repars-avec .section__title em { color: oklch(0.85 0.11 175); }
+    #ce-que-tu-repars-avec .section__lead { color: oklch(0.90 0.02 175); }
+    #ce-que-tu-repars-avec .blocks {
+      gap: 0;
+      border: 1px solid oklch(1 0 0 / 16%);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    #ce-que-tu-repars-avec .card {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid oklch(1 0 0 / 12%);
+      padding: 2rem 1.75rem;
+    }
+    #ce-que-tu-repars-avec .card:last-child { border-bottom: 0; }
+    #ce-que-tu-repars-avec .card:hover {
+      transform: none;
+      background: oklch(1 0 0 / 4%);
+      border-color: oklch(1 0 0 / 12%);
+    }
+    #ce-que-tu-repars-avec .card::before { display: none; } /* kill multiply grain on the green */
+    #ce-que-tu-repars-avec .block__num { color: oklch(0.86 0.10 175); }
+    #ce-que-tu-repars-avec .block__title { color: oklch(0.99 0.01 175); }
+    #ce-que-tu-repars-avec .block__separator { background: oklch(1 0 0 / 16%); }
+    #ce-que-tu-repars-avec .block__body { color: oklch(0.88 0.02 175); }
+    #ce-que-tu-repars-avec .block__body strong { color: oklch(0.99 0.01 175); font-weight: 600; }
+    @media (min-width: 768px) {
+      #ce-que-tu-repars-avec .card { border-bottom: 0; border-right: 1px solid oklch(1 0 0 / 12%); }
+      #ce-que-tu-repars-avec .card:last-child { border-right: 0; }
+    }
+
     /* ── CREDIBILITY — "Why listen to me" stats grid ─────────── */
     .credibility {
       max-width: 60rem;
@@ -2891,11 +2928,11 @@
     <!-- ════════════════════════════════════════════════════════════
          6 — WHAT WE'LL BUILD (3 BLOCKS)
          ════════════════════════════════════════════════════════════ -->
-    <section class="section" id="ce-que-tu-repars-avec">
+    <section class="section section--brand" id="ce-que-tu-repars-avec">
       <div class="container">
         <div class="section__header reveal">
           <p class="preheader"><span class="slash">/</span> Ce que tu repars avec</p>
-          <h2 class="section__title">En 90 minutes, tu repars avec <em style="color:var(--primary)">ton verdict de marque.</em></h2>
+          <h2 class="section__title">En 90 minutes, tu repars avec <em>ton verdict de marque.</em></h2>
           <p class="section__lead">
             Pas un cours qu'on écoute et qu'on oublie. Un diagnostic clair, construit avec toi en direct.
           </p>
@@ -2907,7 +2944,7 @@
             <h3 class="block__title">Pourquoi tu es inVISIBLE.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              La raison <strong style="color:var(--foreground);font-weight:500">précise</strong> pour laquelle le marché ne te voit pas encore.
+              La raison <strong>précise</strong> pour laquelle le marché ne te voit pas encore.
               Pas une vague impression — un constat clair sur ton positionnement et ton image.
             </p>
           </div>
@@ -2917,7 +2954,7 @@
             <h3 class="block__title">Ton Mini Brand Blueprint.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              Le plan de ta marque sur <strong style="color:var(--foreground);font-weight:500">une page</strong> — positionnement, direction visuelle, contenu —
+              Le plan de ta marque sur <strong>une page</strong> — positionnement, direction visuelle, contenu —
               rempli en direct pendant la session. Tu repars avec, pas avec des notes.
             </p>
           </div>
@@ -2927,7 +2964,7 @@
             <h3 class="block__title">Ta première action de Clarté.</h3>
             <div class="block__separator"></div>
             <p class="block__body">
-              Le geste <strong style="color:var(--foreground);font-weight:500">concret</strong> à poser dès cette semaine pour amorcer ton passage
+              Le geste <strong>concret</strong> à poser dès cette semaine pour amorcer ton passage
               d'inVISIBLE à VISIBLE. Clair, faisable, sans démarcher.
             </p>
           </div>
