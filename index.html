@@ -2716,40 +2716,48 @@
     /* ── Selection highlight in brand teal ──────────────────── */
     ::selection { background: oklch(0.5 0.10 175 / 22%); color: var(--foreground); }
 
-    /* ── Cookie consent (RGPD / GA4 Consent Mode) ────────────────
-       Hidden until JS decides (no stored choice → show). On mobile it
-       sits ABOVE the sticky .mobile-cta bar (z 55); below the payment
-       modal (z 80) so the modal can cover it if opened. */
+    /* ── Cookie consent (RGPD) — mandatory blocking dialog ───────
+       Full-screen backdrop + centered card. No dismiss except via
+       Accepter / Refuser (both offered equally → stays compliant:
+       we force the CHOICE, not acceptance). Body scroll is locked
+       while open (.is-modal-open). Sits above everything, incl. the
+       payment modal (z 80). */
     .consent {
       position: fixed;
-      left: 1rem; right: 1rem; bottom: 5rem;
-      z-index: 60;
-      max-width: 30rem;
-      margin-inline: auto;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: oklch(0.18 0.02 175 / 62%);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    .consent.is-visible { display: flex; }
+    .consent__dialog {
+      width: 100%;
+      max-width: 27rem;
       background: var(--card);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-lg);
-      padding: 1.1rem 1.2rem 1.15rem;
-      box-shadow: 0 12px 34px -12px oklch(0 0 0 / 30%);
-      display: none;
+      padding: 1.6rem 1.5rem 1.5rem;
+      box-shadow: 0 24px 60px -16px oklch(0 0 0 / 45%);
     }
-    .consent.is-visible { display: block; }
+    .consent__title { font-size: 1.05rem; font-weight: 600; color: var(--foreground); margin: 0 0 0.5rem; }
     .consent__text { font-size: 0.9rem; line-height: 1.55; color: var(--muted-foreground); margin: 0; }
     .consent__text strong { color: var(--foreground); font-weight: 600; }
-    .consent__actions { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
+    .consent__actions { display: flex; gap: 0.6rem; margin-top: 1.25rem; }
     .consent__btn {
-      font: inherit; font-size: 0.85rem; font-weight: 600;
-      padding: 0.55rem 1.1rem; border-radius: 999px; cursor: pointer;
+      flex: 1;
+      font: inherit; font-size: 0.9rem; font-weight: 600;
+      padding: 0.7rem 1rem; border-radius: 999px; cursor: pointer;
       border: 1px solid transparent; transition: background 0.2s, border-color 0.2s, opacity 0.2s;
     }
     .consent__btn--accept { background: var(--primary); color: #fff; }
     .consent__btn--accept:hover { opacity: 0.9; }
     .consent__btn--refuse { background: transparent; color: var(--muted-foreground); border-color: var(--border-strong); }
     .consent__btn--refuse:hover { border-color: var(--muted-foreground); }
-    @media (min-width: 768px) {
-      /* No mobile CTA bar on desktop → tuck the card into the corner. */
-      .consent { left: 1.25rem; right: auto; bottom: 1.25rem; margin-inline: 0; }
-    }
   </style>
 </head>
 <body>
@@ -3879,16 +3887,20 @@
     }
   </script>
 
-  <!-- ── Cookie consent banner (RGPD) ─────────────────────────────
-       Shows once if no choice is stored. "Accepter" flips GA4 consent
-       to granted; "Refuser" leaves it denied (GA stays cookieless). -->
-  <div class="consent" id="consent" role="dialog" aria-live="polite" aria-label="Consentement cookies">
-    <p class="consent__text">
-      On utilise des cookies pour <strong>mesurer l'audience</strong> (Google Analytics) et améliorer le site. Tu peux refuser sans rien perdre.
-    </p>
-    <div class="consent__actions">
-      <button type="button" class="consent__btn consent__btn--accept" id="consent-accept">Accepter</button>
-      <button type="button" class="consent__btn consent__btn--refuse" id="consent-refuse">Refuser</button>
+  <!-- ── Cookie consent — mandatory dialog (RGPD) ─────────────────
+       Blocks the page on first visit until the visitor chooses.
+       "Accepter" flips GA4 consent to granted; "Refuser" leaves it
+       denied (GA stays cookieless). Choice stored in localStorage. -->
+  <div class="consent" id="consent" role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-desc">
+    <div class="consent__dialog">
+      <h2 class="consent__title" id="consent-title">Avant de continuer</h2>
+      <p class="consent__text" id="consent-desc">
+        On utilise des cookies pour <strong>mesurer l'audience</strong> (Google Analytics) et améliorer le site. Fais ton choix pour continuer — tu peux refuser sans rien perdre.
+      </p>
+      <div class="consent__actions">
+        <button type="button" class="consent__btn consent__btn--refuse" id="consent-refuse">Refuser</button>
+        <button type="button" class="consent__btn consent__btn--accept" id="consent-accept">Accepter</button>
+      </div>
     </div>
   </div>
   <script>
@@ -3896,18 +3908,33 @@
       var KEY = 'visible_consent';
       var el = document.getElementById('consent');
       if (!el) return;
+      var accept = document.getElementById('consent-accept');
+      var refuse = document.getElementById('consent-refuse');
       var stored = null;
       try { stored = localStorage.getItem(KEY); } catch (e) {}
-      if (stored !== 'granted' && stored !== 'denied') el.classList.add('is-visible');
       function choose(v) {
         try { localStorage.setItem(KEY, v); } catch (e) {}
         if (v === 'granted' && typeof gtag === 'function') {
           gtag('consent', 'update', { analytics_storage: 'granted' });
         }
         el.classList.remove('is-visible');
+        document.body.classList.remove('is-modal-open');
       }
-      document.getElementById('consent-accept').addEventListener('click', function () { choose('granted'); });
-      document.getElementById('consent-refuse').addEventListener('click', function () { choose('denied'); });
+      accept.addEventListener('click', function () { choose('granted'); });
+      refuse.addEventListener('click', function () { choose('denied'); });
+      // Trap keyboard focus between the two buttons while the dialog is open.
+      el.addEventListener('keydown', function (e) {
+        if (e.key !== 'Tab') return;
+        var f = [refuse, accept];
+        var i = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[e.shiftKey ? (i <= 0 ? f.length - 1 : i - 1) : (i === f.length - 1 ? 0 : i + 1)].focus();
+      });
+      if (stored !== 'granted' && stored !== 'denied') {
+        el.classList.add('is-visible');
+        document.body.classList.add('is-modal-open'); // lock page scroll until a choice is made
+        try { accept.focus(); } catch (e) {}
+      }
     })();
   </script>
 
